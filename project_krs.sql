@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Agu 2020 pada 18.13
+-- Waktu pembuatan: 05 Agu 2020 pada 19.27
 -- Versi server: 10.4.13-MariaDB
 -- Versi PHP: 7.4.7
 
@@ -24,6 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES
+(1, 'admin', '$2y$10$smU6bWr.wsRdAzKLRrqQxu7EA6F/a64HdjCxCmt53qGQ4vRoB7iLC');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `akademik`
 --
 
@@ -32,6 +51,13 @@ CREATE TABLE `akademik` (
   `nia` bigint(20) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `akademik`
+--
+
+INSERT INTO `akademik` (`id`, `nia`, `password`) VALUES
+(1, 123, '$2y$10$smU6bWr.wsRdAzKLRrqQxu7EA6F/a64HdjCxCmt53qGQ4vRoB7iLC');
 
 -- --------------------------------------------------------
 
@@ -53,6 +79,13 @@ CREATE TABLE `dosen` (
   `jabatan` enum('dosen','sekjur','kajur') NOT NULL,
   `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `dosen`
+--
+
+INSERT INTO `dosen` (`id`, `nip`, `nama`, `jenis_kelamin`, `alamat`, `tgl_lahir`, `password`, `tgl_masuk`, `nomor_telephone`, `agama`, `jabatan`, `email`) VALUES
+(1, 1234567890, 'cuk', 'laki-laki', 'Wonosari St No.KM.8,5, Gandu, Sendangtirto, Berbah, Sleman Regency, Special Region of Yogyakarta 55573', '1968-08-11', '$2y$10$smU6bWr.wsRdAzKLRrqQxu7EA6F/a64HdjCxCmt53qGQ4vRoB7iLC', '2020-08-06', '0000', 'islam', 'dosen', 'asdf@mail.com');
 
 -- --------------------------------------------------------
 
@@ -101,6 +134,13 @@ CREATE TABLE `mahasiswa` (
   `id_dosen` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `mahasiswa`
+--
+
+INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `password`, `jenis_kelamin`, `alamat`, `tgl_masuk`, `nomor_telephone`, `agama`, `email`, `id_dosen`) VALUES
+(1, 1111, 'asdf', '$2y$10$smU6bWr.wsRdAzKLRrqQxu7EA6F/a64HdjCxCmt53qGQ4vRoB7iLC', 'laki-laki', 'asdf', '2020-08-05', '12345', 'islam', 'testuser@mail.com', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -147,6 +187,12 @@ CREATE TABLE `transkip_nilai` (
 --
 
 --
+-- Indeks untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `akademik`
 --
 ALTER TABLE `akademik`
@@ -168,6 +214,12 @@ ALTER TABLE `krs_perwalian`
 -- Indeks untuk tabel `laporan`
 --
 ALTER TABLE `laporan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `mahasiswa`
+--
+ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -193,16 +245,22 @@ ALTER TABLE `transkip_nilai`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT untuk tabel `akademik`
 --
 ALTER TABLE `akademik`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `krs_perwalian`
@@ -215,6 +273,12 @@ ALTER TABLE `krs_perwalian`
 --
 ALTER TABLE `laporan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `mahasiswa`
+--
+ALTER TABLE `mahasiswa`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `matakuliah`
