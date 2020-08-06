@@ -69,10 +69,10 @@ class Login extends CI_Controller
                 if(password_verify($password, $mahasiswa['password'])) {
                     //echo "sini";
                     $data = [
-                        'mhs_id'   => $mahasiswa['id'],
-                        'mhs_nim'  => $mahasiswa['nim'],
-                        'mhs_nama' => $mahasiswa['nama'],
-                        'level'    => 'mahasiswa'
+                        'mhs_id'    => $mahasiswa['id'],
+                        'mhs_nim'   => $mahasiswa['nim'],
+                        'nama'      => $mahasiswa['nama'],
+                        'level'     => 'mahasiswa'
                     ];
                     $this->session->set_userdata($data);
                     redirect('/dashboard');
@@ -109,10 +109,10 @@ class Login extends CI_Controller
                 if(password_verify($password, $dosen['password'])) {
                     //echo "sini";
                     $data = [
-                        'dosen_id'   => $dosen['id'],
-                        'dosen_nip'  => $dosen['nim'],
-                        'dosen_nama' => $dosen['nama'],
-                        'level'    => $dosen['jabatan']
+                        'dosen_id'      => $dosen['id'],
+                        'dosen_nip'     => $dosen['nim'],
+                        'nama'          => $dosen['nama'],
+                        'level'         => $dosen['jabatan']
                     ];
                     $this->session->set_userdata($data);
                     redirect('/dashboard');
@@ -148,10 +148,10 @@ class Login extends CI_Controller
                 if(password_verify($password, $akademik['password'])) {
                     //echo "sini";
                     $data = [
-                        'mhs_id'   => $akademik['id'],
-                        'mhs_nia'  => $akademik['nia'],
-                        'mhs_nama' => $akademik['nama'],
-                        'level'    => 'akademik'
+                        'mhs_id'    => $akademik['id'],
+                        'mhs_nia'   => $akademik['nia'],
+                        'nama'      => $akademik['nama'],
+                        'level'     => 'akademik'
                     ];
                     $this->session->set_userdata($data);
                     redirect('/dashboard');
@@ -230,7 +230,7 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('nim', 'NIM', 'required|numeric');
         $this->form_validation->set_rules('password', 'Password', 'required');
         $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');
-        $this->form_validation->set_rules('no_tlpn', 'NIM', 'required|numeric');
+        $this->form_validation->set_rules('no_tlpn', 'Nomor telephone', 'required|numeric');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
         if ($this->form_validation->run() == FALSE)
