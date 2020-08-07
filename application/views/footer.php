@@ -57,6 +57,17 @@
 
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url('assets/'); ?>js/demo/datatables-demo.js"></script>
+
+    <!-- JQuery UI -->
+    <script src="<?php echo base_url('assets/'); ?>vendor/jquery-ui/jquery-ui.js"></script>
+
+    <script>
+        $( function() {
+            $( "#tanggal_lahir" ).datepicker({
+                dateFormat: 'dd-mm-yy'
+            });
+        } );
+    </script>
 </body>
 
 </html>
