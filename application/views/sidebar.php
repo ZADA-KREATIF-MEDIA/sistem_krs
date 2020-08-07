@@ -41,7 +41,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="<?php echo base_url('akademik');?>">
             <i class="fas fa-fw fa-university"></i>
             <span>Akademik</span>
         </a>
