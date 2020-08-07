@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Agu 2020 pada 19.27
--- Versi server: 10.4.13-MariaDB
--- Versi PHP: 7.4.7
+-- Generation Time: Aug 07, 2020 at 09:47 AM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -34,7 +34,7 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`) VALUES
@@ -43,26 +43,27 @@ INSERT INTO `admin` (`id`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `akademik`
+-- Table structure for table `akademik`
 --
 
 CREATE TABLE `akademik` (
   `id` bigint(20) NOT NULL,
   `nia` bigint(20) NOT NULL,
+  `nama` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `akademik`
+-- Dumping data for table `akademik`
 --
 
-INSERT INTO `akademik` (`id`, `nia`, `password`) VALUES
-(1, 123, '$2y$10$smU6bWr.wsRdAzKLRrqQxu7EA6F/a64HdjCxCmt53qGQ4vRoB7iLC');
+INSERT INTO `akademik` (`id`, `nia`, `nama`, `password`) VALUES
+(1, 123, 'intan', '$2y$10$smU6bWr.wsRdAzKLRrqQxu7EA6F/a64HdjCxCmt53qGQ4vRoB7iLC');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `dosen`
+-- Table structure for table `dosen`
 --
 
 CREATE TABLE `dosen` (
@@ -81,16 +82,17 @@ CREATE TABLE `dosen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `dosen`
+-- Dumping data for table `dosen`
 --
 
 INSERT INTO `dosen` (`id`, `nip`, `nama`, `jenis_kelamin`, `alamat`, `tgl_lahir`, `password`, `tgl_masuk`, `nomor_telephone`, `agama`, `jabatan`, `email`) VALUES
-(1, 1234567890, 'cuk', 'laki-laki', 'Wonosari St No.KM.8,5, Gandu, Sendangtirto, Berbah, Sleman Regency, Special Region of Yogyakarta 55573', '1968-08-11', '$2y$10$smU6bWr.wsRdAzKLRrqQxu7EA6F/a64HdjCxCmt53qGQ4vRoB7iLC', '2020-08-06', '0000', 'islam', 'dosen', 'asdf@mail.com');
+(2, 108881, 'Cuk Subiantoro1', 'laki-laki', 'janti1', '1998-08-14', '$2y$10$yIuxiJiV0xVoqgs26pPvJucmm./8O7qRzhOHLdtqSABXlLJBLLXl.', '2020-08-07', '08911', 'katholik', 'kajur', 'testuser1@mail.com'),
+(3, 18976, 'Koh Afuk S.Pd', 'perempuan', 'test', '1978-08-26', '$2y$10$6tNH5A3iX1v3iRMGLue8u.pyzqZE0QlhrbEWwB1VQmqdX86n/UDJy', '2020-08-07', '087111', 'hindu', 'sekjur', 'koh@mail.com');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `krs_perwalian`
+-- Table structure for table `krs_perwalian`
 --
 
 CREATE TABLE `krs_perwalian` (
@@ -106,7 +108,7 @@ CREATE TABLE `krs_perwalian` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `laporan`
+-- Table structure for table `laporan`
 --
 
 CREATE TABLE `laporan` (
@@ -117,7 +119,7 @@ CREATE TABLE `laporan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mahasiswa`
+-- Table structure for table `mahasiswa`
 --
 
 CREATE TABLE `mahasiswa` (
@@ -135,16 +137,17 @@ CREATE TABLE `mahasiswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `mahasiswa`
+-- Dumping data for table `mahasiswa`
 --
 
 INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `password`, `jenis_kelamin`, `alamat`, `tgl_masuk`, `nomor_telephone`, `agama`, `email`, `id_dosen`) VALUES
-(1, 1111, 'asdf', '$2y$10$smU6bWr.wsRdAzKLRrqQxu7EA6F/a64HdjCxCmt53qGQ4vRoB7iLC', 'laki-laki', 'asdf', '2020-08-05', '12345', 'islam', 'testuser@mail.com', 0);
+(2, 155410021, 'Pulung Nugroho Adi', '$2y$10$Ht1Q.mvBVAh4TDYqYJr8Zu/pUB1uGCiUFhSmkt/8jHO8OElaEocgW', 'laki-laki', 'jahanam', '2020-08-06', '081900800700', 'islam', 'pulung@jancuk.com', 0),
+(3, 155410008, 'Syaifudin Dwi K', '$2y$10$5cDLXam95lCSL5nT5Zl15e5HyGXAk3E7LHxjqOe2H5rRv4QCeMB8C', 'laki-laki', 'godean', '2020-08-07', '087888999000', 'hindu', 'dwi@gmail.com', 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `matakuliah`
+-- Table structure for table `matakuliah`
 --
 
 CREATE TABLE `matakuliah` (
@@ -161,7 +164,7 @@ CREATE TABLE `matakuliah` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `portofolio_akademik`
+-- Table structure for table `portofolio_akademik`
 --
 
 CREATE TABLE `portofolio_akademik` (
@@ -173,7 +176,7 @@ CREATE TABLE `portofolio_akademik` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transkip_nilai`
+-- Table structure for table `transkip_nilai`
 --
 
 CREATE TABLE `transkip_nilai` (
@@ -187,113 +190,113 @@ CREATE TABLE `transkip_nilai` (
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `akademik`
+-- Indexes for table `akademik`
 --
 ALTER TABLE `akademik`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `dosen`
+-- Indexes for table `dosen`
 --
 ALTER TABLE `dosen`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `krs_perwalian`
+-- Indexes for table `krs_perwalian`
 --
 ALTER TABLE `krs_perwalian`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `laporan`
+-- Indexes for table `laporan`
 --
 ALTER TABLE `laporan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `mahasiswa`
+-- Indexes for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `matakuliah`
+-- Indexes for table `matakuliah`
 --
 ALTER TABLE `matakuliah`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `portofolio_akademik`
+-- Indexes for table `portofolio_akademik`
 --
 ALTER TABLE `portofolio_akademik`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `transkip_nilai`
+-- Indexes for table `transkip_nilai`
 --
 ALTER TABLE `transkip_nilai`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `akademik`
+-- AUTO_INCREMENT for table `akademik`
 --
 ALTER TABLE `akademik`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `dosen`
+-- AUTO_INCREMENT for table `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `krs_perwalian`
+-- AUTO_INCREMENT for table `krs_perwalian`
 --
 ALTER TABLE `krs_perwalian`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `laporan`
+-- AUTO_INCREMENT for table `laporan`
 --
 ALTER TABLE `laporan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `mahasiswa`
+-- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `matakuliah`
+-- AUTO_INCREMENT for table `matakuliah`
 --
 ALTER TABLE `matakuliah`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `portofolio_akademik`
+-- AUTO_INCREMENT for table `portofolio_akademik`
 --
 ALTER TABLE `portofolio_akademik`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `transkip_nilai`
+-- AUTO_INCREMENT for table `transkip_nilai`
 --
 ALTER TABLE `transkip_nilai`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
