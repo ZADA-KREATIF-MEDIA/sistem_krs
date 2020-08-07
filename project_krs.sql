@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 07, 2020 at 09:47 AM
+-- Generation Time: Aug 07, 2020 at 07:50 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -154,12 +154,21 @@ CREATE TABLE `matakuliah` (
   `id` bigint(20) NOT NULL,
   `kode_matkul` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
-  `status` enum('akti','tidak') NOT NULL,
-  `jam` time NOT NULL,
+  `status` enum('aktif','tidak') NOT NULL,
+  `jam_mulai` varchar(20) NOT NULL,
+  `jam_selesai` varchar(20) NOT NULL,
   `kelas` int(11) NOT NULL,
   `sks` int(11) NOT NULL,
   `tipe` enum('teori','praktik','praktikum') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `matakuliah`
+--
+
+INSERT INTO `matakuliah` (`id`, `kode_matkul`, `nama`, `status`, `jam_mulai`, `jam_selesai`, `kelas`, `sks`, `tipe`) VALUES
+(1, 'TI0011', 'Kecerdasan Buatans', 'tidak', '07:31', '10:01', 2, 2, 'teori'),
+(2, 'TI002', 'Kecerdasan Hekel', 'aktif', '09:00', '12:00', 4, 2, 'praktik');
 
 -- --------------------------------------------------------
 
@@ -287,7 +296,7 @@ ALTER TABLE `mahasiswa`
 -- AUTO_INCREMENT for table `matakuliah`
 --
 ALTER TABLE `matakuliah`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `portofolio_akademik`

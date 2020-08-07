@@ -5,7 +5,7 @@
     <?= $this->session->flashdata('message'); ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="<?php echo base_url('akademik/tambah_akademik')?>" class="btn btn-success float-right" data-toggle="modal" data-target="#tambahAkademik"><i class="fas fa-plus"></i>&nbsp;Tambah Akademik</a>
+            <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#tambahAkademik"><i class="fas fa-plus"></i>&nbsp;Tambah Akademik</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">

@@ -60,12 +60,16 @@
 
     <!-- JQuery UI -->
     <script src="<?php echo base_url('assets/'); ?>vendor/jquery-ui/jquery-ui.js"></script>
+        
+    <!-- Jquery Mask -->
+    <script src="<?php echo base_url('assets/'); ?>vendor/jquery-mask/src/jquery.mask.js"></script>
 
     <script>
         $( function() {
             $( "#tanggal_lahir" ).datepicker({
                 dateFormat: 'dd-mm-yy'
-            });
+            });  
+            $('.jam').mask('00:00');
         } );
     </script>
 </body>
