@@ -35,7 +35,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="<?php echo base_url('dosen');?>">
             <i class="fas fa-fw fa-user-tie"></i>
             <span>Dosen</span>
         </a>
