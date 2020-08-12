@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 07, 2020 at 07:50 PM
+-- Generation Time: Aug 12, 2020 at 08:56 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -86,7 +86,7 @@ CREATE TABLE `dosen` (
 --
 
 INSERT INTO `dosen` (`id`, `nip`, `nama`, `jenis_kelamin`, `alamat`, `tgl_lahir`, `password`, `tgl_masuk`, `nomor_telephone`, `agama`, `jabatan`, `email`) VALUES
-(2, 108881, 'Cuk Subiantoro1', 'laki-laki', 'janti1', '1998-08-14', '$2y$10$yIuxiJiV0xVoqgs26pPvJucmm./8O7qRzhOHLdtqSABXlLJBLLXl.', '2020-08-07', '08911', 'katholik', 'kajur', 'testuser1@mail.com'),
+(2, 108881, 'Cuk Subiantoro', 'laki-laki', 'janti1', '1998-08-14', '$2y$10$yIuxiJiV0xVoqgs26pPvJucmm./8O7qRzhOHLdtqSABXlLJBLLXl.', '2020-08-11', '08911', 'katholik', 'kajur', 'testuser1@mail.com'),
 (3, 18976, 'Koh Afuk S.Pd', 'perempuan', 'test', '1978-08-26', '$2y$10$6tNH5A3iX1v3iRMGLue8u.pyzqZE0QlhrbEWwB1VQmqdX86n/UDJy', '2020-08-07', '087111', 'hindu', 'sekjur', 'koh@mail.com');
 
 -- --------------------------------------------------------
@@ -142,7 +142,9 @@ CREATE TABLE `mahasiswa` (
 
 INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `password`, `jenis_kelamin`, `alamat`, `tgl_masuk`, `nomor_telephone`, `agama`, `email`, `id_dosen`) VALUES
 (2, 155410021, 'Pulung Nugroho Adi', '$2y$10$Ht1Q.mvBVAh4TDYqYJr8Zu/pUB1uGCiUFhSmkt/8jHO8OElaEocgW', 'laki-laki', 'jahanam', '2020-08-06', '081900800700', 'islam', 'pulung@jancuk.com', 0),
-(3, 155410008, 'Syaifudin Dwi K', '$2y$10$5cDLXam95lCSL5nT5Zl15e5HyGXAk3E7LHxjqOe2H5rRv4QCeMB8C', 'laki-laki', 'godean', '2020-08-07', '087888999000', 'hindu', 'dwi@gmail.com', 0);
+(3, 155410008, 'Syaifudin Dwi K', '$2y$10$5cDLXam95lCSL5nT5Zl15e5HyGXAk3E7LHxjqOe2H5rRv4QCeMB8C', 'laki-laki', 'godean', '2020-08-07', '087888999000', 'hindu', 'dwi@gmail.com', 0),
+(4, 15541004, 'Endra Setiawan Cok', '$2y$10$FRMLpPVQX/rYogKVHP.LhOY7caLb2XBWaGxRPlS6Ki8Ig9.9xLwAW', 'laki-laki', 'camiles', '2020-08-11', '089111', 'budha', 'endra@mail.com', 0),
+(6, 155410035, 'Devi Ariana Putri', '$2y$10$P31L/MaPOrcuqWXSggnN3.nvX0guK2Oggtb2T8Pv1vnkW5P5o3KfO', 'perempuan', 'watumalang', '2020-08-11', '078', 'islam', 'devi@mail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -168,19 +170,29 @@ CREATE TABLE `matakuliah` (
 
 INSERT INTO `matakuliah` (`id`, `kode_matkul`, `nama`, `status`, `jam_mulai`, `jam_selesai`, `kelas`, `sks`, `tipe`) VALUES
 (1, 'TI0011', 'Kecerdasan Buatans', 'tidak', '07:31', '10:01', 2, 2, 'teori'),
-(2, 'TI002', 'Kecerdasan Hekel', 'aktif', '09:00', '12:00', 4, 2, 'praktik');
+(2, 'TI002', 'Kecerdasan Hekel', 'aktif', '09:00', '12:00', 4, 2, 'praktik'),
+(5, 'TI003', 'Jancuk Ancuk', 'aktif', '08:99', '14:00', 1, 2, 'praktik'),
+(6, 'TI004', 'Test', 'aktif', '11:11', '11:11', 2, 3, 'praktik');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `portofolio_akademik`
+-- Table structure for table `matakuliah_diambil`
 --
 
-CREATE TABLE `portofolio_akademik` (
+CREATE TABLE `matakuliah_diambil` (
   `id` bigint(20) NOT NULL,
   `id_matakuliah` bigint(20) NOT NULL,
-  `id_dosen` bigint(20) NOT NULL
+  `id_mahasiswa` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `matakuliah_diambil`
+--
+
+INSERT INTO `matakuliah_diambil` (`id`, `id_matakuliah`, `id_mahasiswa`) VALUES
+(4, 1, 3),
+(7, 6, 3);
 
 -- --------------------------------------------------------
 
@@ -190,8 +202,9 @@ CREATE TABLE `portofolio_akademik` (
 
 CREATE TABLE `transkip_nilai` (
   `id` bigint(20) NOT NULL,
-  `id_matakuliah` bigint(20) NOT NULL,
-  `nilai` bigint(20) NOT NULL
+  `id_mahasiswa` bigint(20) NOT NULL,
+  `id_matkul` bigint(20) NOT NULL,
+  `nilai` enum('A','B','C','D','E') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -241,9 +254,9 @@ ALTER TABLE `matakuliah`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `portofolio_akademik`
+-- Indexes for table `matakuliah_diambil`
 --
-ALTER TABLE `portofolio_akademik`
+ALTER TABLE `matakuliah_diambil`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -266,13 +279,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `akademik`
 --
 ALTER TABLE `akademik`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `krs_perwalian`
@@ -290,19 +303,19 @@ ALTER TABLE `laporan`
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `matakuliah`
 --
 ALTER TABLE `matakuliah`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `portofolio_akademik`
+-- AUTO_INCREMENT for table `matakuliah_diambil`
 --
-ALTER TABLE `portofolio_akademik`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `matakuliah_diambil`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `transkip_nilai`
