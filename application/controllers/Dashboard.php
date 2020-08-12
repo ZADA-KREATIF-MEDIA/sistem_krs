@@ -14,7 +14,15 @@ class Dashboard extends CI_Controller
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
-        $this->load->view('dashboard/index.php');
+        if($this->session->userdata('level') == "admin"){
+            $this->load->view('dashboard/index.php');
+        }else if($this->session->userdata('level') == "akademik"){
+            $this->load->view('dashboard/index_akademik');
+        }else if($this->session->userdata('level') == "dosen"){
+            $this->load->view('dashboard/index_dosen');
+        }else{
+            $this->load->view('dashboard/index_mahasiswa');
+        }
         $this->load->view('footer.php');
     }
 }
