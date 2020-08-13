@@ -14,6 +14,7 @@ Class M_mahasiswa extends CI_Model
         return $data;
     }
 
+
     public function m_get_matkul_belum_diambil($id)
     {
         // $data_matkul_terambil = $this->m_get_matkul_diambil();

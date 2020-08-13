@@ -24,6 +24,7 @@ class Mahasiswa extends CI_Controller
     public function daftar_matakuliah()
     {
         $data['halaman']    = "Data Matakuliah";
+
         $matkul_diambil     =  $this->mod->m_get_matkul_diambil();
         // print('<pre>');print_r($matkul_diambil);
         $i=0;
