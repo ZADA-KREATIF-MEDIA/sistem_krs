@@ -14,21 +14,29 @@ Class M_mahasiswa extends CI_Model
         return $data;
     }
 
-    public function m_get_matkul_belum_diambil()
+
+    public function m_get_matkul_belum_diambil($id)
     {
-        $data_matkul_terambil = $this->m_get_matkul_diambil();
+        // $data_matkul_terambil = $this->m_get_matkul_diambil();
         // print('<pre>');print_r($data_matkul_terambil);
-        $i=0;
-        foreach($data_matkul_terambil as $val){
-            $this->db->select()
-                ->from('matakuliah')
-                ->where('id !=', $val['id_matkul']);
-            $query = $this->db->get_compiled_select();
-            // print('<pre>');print_r($query);
-            $data  = $this->db->query($query)->result_array();
-            $i++;
-        }
+        // $i=0;
+        // foreach($data_matkul_terambil as $val){
+        //     $this->db->select()
+        //         ->from('matakuliah')
+        //         ->where('id !=', $val['id_matkul']);
+        //     $query = $this->db->get_compiled_select();
+        //     // print('<pre>');print_r($query);
+        //     $data  = $this->db->query($query)->result_array();
+        //     $i++;
+        // }
         // print('<pre>');print_r($data);exit();
+        $this->db->select()
+                ->from('matakuliah')
+                ->where_not_in('id', $id);
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);
+        $data  = $this->db->query($query)->result_array();
+        // print('<pre>');print_r($data);
         return $data;
     }
 
