@@ -19,8 +19,8 @@
         <span>Dashboard</span></a>
     </li>
 
+    <!-- Menu Admin -->
     <?php if($this->session->userdata('level') == "admin"):?>
-        <!-- Menu Admin -->
         <hr class="sidebar-divider">
             <div class="sidebar-heading">
                 Users
@@ -80,6 +80,15 @@
                 <span>Catatan Dosen</span></a>
             </li>
         <hr class="sidebar-divider d-none d-md-block">
+    <?php endif;?>
+    <?php if($this->session->userdata('level') == "akademik"):?>
+        <hr class="sidebar-divider d-none d-md-block">
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('akademik/mahasiswa');?>">
+                <i class="fas fa-fw fa-user-graduate"></i>
+                <span>Mahasiswa</span>
+            </a>
+        </li>
     <?php endif;?>
 
 <!-- Nav Item - Tables -->

@@ -12,7 +12,7 @@ class Admin extends CI_Controller
     public function mahasiswa()
     {
         $data['halaman']    = "Data Mahasiswa";
-        $data['mahasiswa']  = $this->mod->m_get_all_mahasiswa();
+        $data['mahasiswa']  = $this->mod->m_get_all_mahasiswa_plus_dosen();
         // print('<pre>');print_r($data);exit();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
@@ -24,6 +24,7 @@ class Admin extends CI_Controller
     public function tambah_mahasiswa()
     {
         $data['halaman']    = "TambahData Mahasiswa";
+        $data['dosen']      = $this->mod->m_get_all_dosen();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
@@ -40,6 +41,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('no_tlpn', 'Nomor Telephone', 'required|numeric');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('dosen_pembimbing', 'Dosen Pembimbing', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $data['halaman']    = "TambahData Mahasiswa";
@@ -58,7 +60,8 @@ class Admin extends CI_Controller
                 'tgl_masuk'=> date("Y-m-d"),
                 'nomor_telephone' => $this->input->post('no_tlpn', true),
                 'agama' => $this->input->post('agama', true),
-                'email' => $this->input->post('email', true)
+                'email' => $this->input->post('email', true),
+                'id_dosen' => $this->input->post('dosen_pembimbing')
             ];
             $this->mod->m_simpan_mahasiswa($post);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Tambah Data Mahasiswa Berhasil</div>');
@@ -72,6 +75,7 @@ class Admin extends CI_Controller
         $data['mahasiswa'] = $this->mod->m_get_mahasiswa_by($id);
         // print('<pre>');print_r($data);exit();
         $data['halaman']    = "Edit Data Mahasiswa";
+        $data['dosen']      = $this->mod->m_get_all_dosen();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
@@ -86,6 +90,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('no_tlpn', 'Nomor Telephone', 'required|numeric');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('dosen_pembimbing', 'Dosen Pembimbing', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $data['halaman']    = "Edit Data Mahasiswa";
@@ -104,7 +109,8 @@ class Admin extends CI_Controller
                 'tgl_masuk'=> date("Y-m-d"),
                 'nomor_telephone' => $this->input->post('no_tlpn', true),
                 'agama' => $this->input->post('agama', true),
-                'email' => $this->input->post('email', true)
+                'email' => $this->input->post('email', true),
+                'id_dosen' => $this->input->post('dosen_pembimbing')
             ];
             // print('<pre>');print_r($post);exit();
             $this->mod->m_update_mahasiswa($post);
