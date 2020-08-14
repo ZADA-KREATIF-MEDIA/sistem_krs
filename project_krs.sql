@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2020 at 08:56 AM
+-- Generation Time: Aug 14, 2020 at 09:12 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -141,10 +141,10 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `password`, `jenis_kelamin`, `alamat`, `tgl_masuk`, `nomor_telephone`, `agama`, `email`, `id_dosen`) VALUES
-(2, 155410021, 'Pulung Nugroho Adi', '$2y$10$Ht1Q.mvBVAh4TDYqYJr8Zu/pUB1uGCiUFhSmkt/8jHO8OElaEocgW', 'laki-laki', 'jahanam', '2020-08-06', '081900800700', 'islam', 'pulung@jancuk.com', 0),
-(3, 155410008, 'Syaifudin Dwi K', '$2y$10$5cDLXam95lCSL5nT5Zl15e5HyGXAk3E7LHxjqOe2H5rRv4QCeMB8C', 'laki-laki', 'godean', '2020-08-07', '087888999000', 'hindu', 'dwi@gmail.com', 0),
-(4, 15541004, 'Endra Setiawan Cok', '$2y$10$FRMLpPVQX/rYogKVHP.LhOY7caLb2XBWaGxRPlS6Ki8Ig9.9xLwAW', 'laki-laki', 'camiles', '2020-08-11', '089111', 'budha', 'endra@mail.com', 0),
-(6, 155410035, 'Devi Ariana Putri', '$2y$10$P31L/MaPOrcuqWXSggnN3.nvX0guK2Oggtb2T8Pv1vnkW5P5o3KfO', 'perempuan', 'watumalang', '2020-08-11', '078', 'islam', 'devi@mail.com', 0);
+(2, 155410021, 'Pulung Nugroho Adi', '$2y$10$Ht1Q.mvBVAh4TDYqYJr8Zu/pUB1uGCiUFhSmkt/8jHO8OElaEocgW', 'laki-laki', 'jahanam', '2020-08-13', '081900800700', 'islam', 'pulung@jancuk.com', 3),
+(3, 155410008, 'Syaifudin Dwi K', '$2y$10$5cDLXam95lCSL5nT5Zl15e5HyGXAk3E7LHxjqOe2H5rRv4QCeMB8C', 'laki-laki', 'godean', '2020-08-13', '087888999000', 'hindu', 'dwi@gmail.com', 2),
+(6, 155410035, 'Devi Ariana Putri', '$2y$10$P31L/MaPOrcuqWXSggnN3.nvX0guK2Oggtb2T8Pv1vnkW5P5o3KfO', 'perempuan', 'watumalang', '2020-08-13', '078', 'islam', 'devi@mail.com', 2),
+(7, 155410018, 'Frangky Novan', '$2y$10$pOzDkeBI3D44MGJxWdqsjOcmSsgac9aanJEsbPR5NRYB2qC9WvXTu', 'laki-laki', 'asdf', '2020-08-13', '007', 'kristen', 'frangky@mail.com', 3);
 
 -- --------------------------------------------------------
 
@@ -303,7 +303,7 @@ ALTER TABLE `laporan`
 -- AUTO_INCREMENT for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `matakuliah`
@@ -315,7 +315,7 @@ ALTER TABLE `matakuliah`
 -- AUTO_INCREMENT for table `matakuliah_diambil`
 --
 ALTER TABLE `matakuliah_diambil`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `transkip_nilai`
