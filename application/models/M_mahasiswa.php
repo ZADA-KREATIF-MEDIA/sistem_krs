@@ -54,4 +54,44 @@ Class M_mahasiswa extends CI_Model
         $this->db->query($query);
         return true;
     }
+
+    public function m_save_krs_perwalian($post_krs)
+    {
+        $this->db->insert('krs_perwalian', $post_krs);
+        return true;
+    }
+
+    public function m_get_perwalian()
+    {
+        $this->db->select()
+            ->from('krs_perwalian')
+            ->where("id_mahasiswa", $this->session->userdata('mhs_id'));
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);exit;
+        $data  = $this->db->query($query)->result_array();
+        return $data;
+    }
+
+    public function m_get_krs_catatan($id)
+    {
+        $this->db->select()
+            ->from('krs_perwalian')
+            ->where("id", $id);
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);exit;
+        $data  = $this->db->query($query)->row_array();
+        return $data;
+    }
+
+    public function m_get_transkipnilai()
+    {
+        $this->db->select("a.id,b.nama,a.nilai")
+            ->from('transkip_nilai AS a')
+            ->join('matakuliah AS b','b.id = a.id_matkul')
+            ->where("id_mahasiswa", $this->session->userdata('mhs_id'));
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);exit;
+        $data  = $this->db->query($query)->result_array();
+        return $data;
+    }
 }
