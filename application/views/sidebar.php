@@ -14,9 +14,10 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item <?php if($this->uri->segment(1)=="dashboard"){ echo "active"; }?>">
-    <a class="nav-link" href="<?php echo base_url('dashboard')?>">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span></a>
+        <a class="nav-link" href="<?php echo base_url('dashboard')?>">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+        </a>
     </li>
 
     <!-- Menu Admin -->
@@ -70,14 +71,14 @@
                 <span>Matakuliah</span></a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="tables.html">
+            <a class="nav-link" href="<?php echo base_url('mahasiswa/transkip_nilai');?>">
                 <i class="fas fa-fw fa-print"></i>
                 <span>Transkip Nilai</span></a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="tables.html">
+            <a class="nav-link" href="<?php echo base_url('mahasiswa/krs');?>">
                 <i class="fas fa-fw fa-clipboard"></i>
-                <span>Catatan Dosen</span></a>
+                <span>Perwalian</span></a>
             </li>
         <hr class="sidebar-divider d-none d-md-block">
     <?php endif;?>

@@ -5,6 +5,7 @@
     <?= $this->session->flashdata('message'); ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
+            <a href="<?php echo base_url('mahasiswa/krs_perwalian/');?><?php echo $this->session->userdata('mhs_id')."/".$this->session->userdata('mhs_id_dosen');?>" class="btn btn-dark">Perwalian</a>
             <a href="<?php echo base_url('mahasiswa/daftar_matakuliah')?>" class="btn btn-success float-right"><i class="fas fa-plus"></i>&nbsp;Ambil Matakuliah</a>
         </div>
         <div class="card-body">
