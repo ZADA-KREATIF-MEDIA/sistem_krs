@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2020 at 09:12 AM
+-- Generation Time: Aug 17, 2020 at 03:21 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -98,12 +98,20 @@ INSERT INTO `dosen` (`id`, `nip`, `nama`, `jenis_kelamin`, `alamat`, `tgl_lahir`
 CREATE TABLE `krs_perwalian` (
   `id` bigint(20) NOT NULL,
   `id_mahasiswa` bigint(20) NOT NULL,
+  `id_dosen` bigint(20) NOT NULL,
   `tgl_perwalian` date NOT NULL,
   `tahun_ajaran` int(11) NOT NULL,
   `semester` int(11) NOT NULL,
   `catatan` text NOT NULL,
   `status` enum('0','1') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `krs_perwalian`
+--
+
+INSERT INTO `krs_perwalian` (`id`, `id_mahasiswa`, `id_dosen`, `tgl_perwalian`, `tahun_ajaran`, `semester`, `catatan`, `status`) VALUES
+(1, 3, 2, '2020-08-17', 0, 0, 'test', '0');
 
 -- --------------------------------------------------------
 
@@ -208,6 +216,13 @@ CREATE TABLE `transkip_nilai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `transkip_nilai`
+--
+
+INSERT INTO `transkip_nilai` (`id`, `id_mahasiswa`, `id_matkul`, `nilai`) VALUES
+(1, 3, 1, 'A');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -291,7 +306,7 @@ ALTER TABLE `dosen`
 -- AUTO_INCREMENT for table `krs_perwalian`
 --
 ALTER TABLE `krs_perwalian`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `laporan`
@@ -321,7 +336,7 @@ ALTER TABLE `matakuliah_diambil`
 -- AUTO_INCREMENT for table `transkip_nilai`
 --
 ALTER TABLE `transkip_nilai`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
