@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 17, 2020 at 03:21 PM
+-- Generation Time: Aug 18, 2020 at 06:25 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.7
 
@@ -169,18 +169,20 @@ CREATE TABLE `matakuliah` (
   `jam_selesai` varchar(20) NOT NULL,
   `kelas` int(11) NOT NULL,
   `sks` int(11) NOT NULL,
-  `tipe` enum('teori','praktik','praktikum') NOT NULL
+  `tipe` enum('teori','praktik','praktikum') NOT NULL,
+  `semester` enum('ganjil','genap') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `matakuliah`
 --
 
-INSERT INTO `matakuliah` (`id`, `kode_matkul`, `nama`, `status`, `jam_mulai`, `jam_selesai`, `kelas`, `sks`, `tipe`) VALUES
-(1, 'TI0011', 'Kecerdasan Buatans', 'tidak', '07:31', '10:01', 2, 2, 'teori'),
-(2, 'TI002', 'Kecerdasan Hekel', 'aktif', '09:00', '12:00', 4, 2, 'praktik'),
-(5, 'TI003', 'Jancuk Ancuk', 'aktif', '08:99', '14:00', 1, 2, 'praktik'),
-(6, 'TI004', 'Test', 'aktif', '11:11', '11:11', 2, 3, 'praktik');
+INSERT INTO `matakuliah` (`id`, `kode_matkul`, `nama`, `status`, `jam_mulai`, `jam_selesai`, `kelas`, `sks`, `tipe`, `semester`) VALUES
+(1, 'TI0011', 'Kecerdasan Buatans', 'tidak', '07:31', '10:01', 2, 2, 'teori', 'genap'),
+(2, 'TI002', 'Kecerdasan Hekel', 'aktif', '09:00', '12:00', 4, 2, 'praktik', 'genap'),
+(5, 'TI003', 'Jancuk Ancuk', 'aktif', '08:99', '14:00', 1, 2, 'praktik', 'ganjil'),
+(6, 'TI004', 'Test', 'aktif', '11:11', '11:11', 2, 3, 'praktik', 'ganjil'),
+(7, 'TI005', 'Sistem Pakar', 'aktif', '14:00', '15:00', 3, 1, 'teori', 'genap');
 
 -- --------------------------------------------------------
 
@@ -324,7 +326,7 @@ ALTER TABLE `mahasiswa`
 -- AUTO_INCREMENT for table `matakuliah`
 --
 ALTER TABLE `matakuliah`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `matakuliah_diambil`
