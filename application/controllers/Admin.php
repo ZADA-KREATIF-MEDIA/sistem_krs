@@ -326,6 +326,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('jam_selesai', 'Jam Selesai', 'required');
         $this->form_validation->set_rules('kelas', 'Kelas', 'required');
         $this->form_validation->set_rules('sks', 'SKS', 'required');
+        $this->form_validation->set_rules('semester', 'Semester', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $data['halaman']    = "Tambah Data Matakuliah";
@@ -342,7 +343,8 @@ class Admin extends CI_Controller
                 'jam_selesai'   => $this->input->post('jam_selesai', true),
                 'kelas'         => $this->input->post('kelas', true),
                 'sks'           => $this->input->post('sks', true),
-                'tipe'          => $this->input->post('tipe', true)
+                'tipe'          => $this->input->post('tipe', true),
+                'semester'      => $this->input->post('semester', true)
             ];
             // print('<pre>');print_r($post);exit();
             $this->mod->m_simpan_matakuliah($post);
@@ -371,6 +373,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('jam_selesai', 'Jam Selesai', 'required');
         $this->form_validation->set_rules('kelas', 'Kelas', 'required');
         $this->form_validation->set_rules('sks', 'SKS', 'required');
+        $this->form_validation->set_rules('semester', 'Semester', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $data['halaman']    = "Edit Data Matakuliah";
@@ -389,7 +392,8 @@ class Admin extends CI_Controller
                 'kelas'         => $this->input->post('kelas', true),
                 'sks'           => $this->input->post('sks', true),
                 'status'        => $this->input->post('status', true),
-                'tipe'          => $this->input->post('tipe', true)
+                'tipe'          => $this->input->post('tipe', true),
+                'semester'      => $this->input->post('semester', true)
             ];
             // print('<pre>');print_r($post);exit();
             $this->mod->m_update_matakuliah($post);
