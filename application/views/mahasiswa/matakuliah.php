@@ -20,6 +20,7 @@
                             <th>Kelas</th>
                             <th>SKS</th>
                             <th>Tipe</th>
+                            <th>Semester</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -35,6 +36,7 @@
                                 <td><?php echo $mat['kelas'];?></td>
                                 <td><?php echo $mat['sks'];?></td>
                                 <td><?php echo $mat['tipe'];?></td>
+                                <td><?php echo ucwords($mat['semester']);?></td>
                                 <td class="text-center">
                                     <a href="<?php echo base_url('mahasiswa/hapus_matakuliah_diambil/').$mat['id']?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                 </td>
