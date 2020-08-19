@@ -17,7 +17,7 @@ class Mahasiswa extends CI_Controller
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
-        $this->load->view('mahasiswa/matakuliah.php');
+        $this->load->view('mahasiswa/matakuliah.php',$data);
         $this->load->view('footer.php');
     }
 
@@ -110,5 +110,21 @@ class Mahasiswa extends CI_Controller
         $this->load->view('footer.php');
     }
 
+    public function portofolio()
+    {
+        $data['halaman']    = "Data Portofolio";
+        $semester = $this->uri->segment(3);
+        if($semester != ""){
+            $data['transkip']   = $this->mod->m_get_portofolio($semester);
+        }else{
+            $data['transkip']   = $this->mod->m_get_transkipnilai();
+        }
+        // print('<pre>');print_r($data);exit();
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('mahasiswa/portofolio.php',$data);
+        $this->load->view('footer.php');
+    }
     
 }

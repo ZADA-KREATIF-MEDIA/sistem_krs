@@ -1,10 +1,15 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Data Transkip Nilai</h1>
+    <h1 class="h3 mb-4 text-gray-800">Data Portofolio</h1>
     <?php echo form_open('mahasiswa/ambil_matkul');?>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
+                <select name="semester" id="semester">
+                    <option>--- Pilih Semester ---</option>
+                    <option value="ganjil" <?php if($this->uri->segment(3) == "ganjil"){ echo "selected";}?>>Ganjil</option>
+                    <option value="genap" <?php if($this->uri->segment(3) == "genap"){ echo "selected";}?>>Genap</option>
+                </select>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

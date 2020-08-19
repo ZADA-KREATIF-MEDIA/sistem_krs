@@ -76,6 +76,11 @@
                 <span>Transkip Nilai</span></a>
             </li>
             <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('mahasiswa/portofolio');?>">
+                <i class="fas fa-fw fa-clipboard-list"></i>
+                <span>Portofolio</span></a>
+            </li>
+            <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url('mahasiswa/krs');?>">
                 <i class="fas fa-fw fa-clipboard"></i>
                 <span>Perwalian</span></a>

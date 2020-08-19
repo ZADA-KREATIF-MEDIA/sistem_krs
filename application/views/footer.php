@@ -93,6 +93,19 @@
                 })
             }
         <?php endif;?>
+        <?php if(($this->uri->segment(1) == "mahasiswa") && ($this->uri->segment(2) == "portofolio")):?>
+            var semester
+            $("#semester").change(function(){
+                semester = $(this).val();
+                kirimSemester();
+            });
+
+            function kirimSemester(){
+                console.log(semester);
+                window.location.href = '<?php echo base_url(); ?>mahasiswa/portofolio/'+semester;
+            }
+       
+        <?php endif;?>
     </script>
 </body>
 

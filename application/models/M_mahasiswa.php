@@ -4,7 +4,7 @@ Class M_mahasiswa extends CI_Model
 {
     public function m_get_matkul_diambil()
     {
-        $this->db->select("a.id, b.id AS id_matkul, b.kode_matkul, b.nama, b.jam_mulai, b.jam_selesai, b.kelas, b.sks, b.tipe")
+        $this->db->select("a.id, b.id AS id_matkul, b.kode_matkul, b.nama, b.jam_mulai, b.jam_selesai, b.kelas, b.sks, b.tipe, b.semester")
             ->from('matakuliah_diambil AS a')
             ->join('matakuliah AS b', 'b.id = a.id_matakuliah', 'left')
             ->where("id_mahasiswa", $this->session->userdata('mhs_id'));
@@ -86,10 +86,23 @@ Class M_mahasiswa extends CI_Model
 
     public function m_get_transkipnilai()
     {
-        $this->db->select("a.id,b.nama,a.nilai")
+        $this->db->select("a.id,b.nama,a.nilai, b.semester")
             ->from('transkip_nilai AS a')
             ->join('matakuliah AS b','b.id = a.id_matkul')
             ->where("id_mahasiswa", $this->session->userdata('mhs_id'));
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);exit;
+        $data  = $this->db->query($query)->result_array();
+        return $data;
+    }
+
+    public function m_get_portofolio($semester)
+    {
+        $this->db->select("a.id,b.nama,a.nilai, b.semester")
+            ->from('transkip_nilai AS a')
+            ->join('matakuliah AS b','b.id = a.id_matkul')
+            ->where("id_mahasiswa", $this->session->userdata('mhs_id'))
+            ->where("b.semester", $semester);
         $query = $this->db->get_compiled_select();
         // print('<pre>');print_r($query);exit;
         $data  = $this->db->query($query)->result_array();
