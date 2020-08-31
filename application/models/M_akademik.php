@@ -57,4 +57,19 @@ Class M_akademik extends CI_Model{
         $this->db->query($query);
         return true;
     }
+
+    public function m_get_all_email()
+    {
+        $this->db->select()
+            ->from('email');
+        $query = $this->db->get_compiled_select();
+        $data  = $this->db->query($query)->result_array();
+        return $data;
+    }
+
+    public function m_save_send_email($post)
+    {
+        $this->db->insert('email', $post);
+        return true;
+    }
 }

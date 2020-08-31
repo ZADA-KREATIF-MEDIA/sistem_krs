@@ -58,6 +58,15 @@
                 </a>
             </li>
         <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Email
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url('admin/email');?>">
+                    <i class="fas fa-fw fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+            </li>
     <?php endif;?>
     <!-- Menu Mahasiswa -->
     <?php if($this->session->userdata('level') == "mahasiswa"):?>
@@ -95,6 +104,16 @@
                 <span>Mahasiswa</span>
             </a>
         </li>
+        <hr class="sidebar-divider d-none d-md-block">
+        <div class="sidebar-heading">
+                Email
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url('akademik/email');?>">
+                    <i class="fas fa-fw fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+            </li>
     <?php endif;?>
 
 <!-- Nav Item - Tables -->

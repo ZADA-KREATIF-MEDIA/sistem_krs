@@ -126,4 +126,58 @@ class Akademik extends CI_Controller
         redirect('akademik/mahasiswa');
     }
 
+    public function email()
+    {
+        $data['halaman']    = "Data Email";
+        $data['email']      = $this->mod->m_get_all_email();
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('admin/email/index', $data);
+        $this->load->view('footer.php');
+    }
+
+    public function kirim_email()
+    {
+        $post = [
+            'penerima'      => $this->input->post('penerima', true),
+            'pengirim'      => $this->input->post('pengirim', true),
+            'isi'           => $this->input->post('pesan', true),
+            'tanggal_kirim' => date("Y-m-d H:i:s")
+        ];
+        // print('<pre>');print_r($post);exit();
+        $this->_sendEmail($post);
+    }
+
+    private function _sendEmail($post)
+    {
+
+        $config = [
+			'protocol' 	=> 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_user' => 'dicaribapak11@gmail.com',
+			'smtp_pass' => 'akuaku123',
+			'smtp_port' => 465,
+			'mailtype' 	=> 'html',
+			'charset' 	=> 'utf-8',
+			'newline'	 => "\r\n"
+		];
+
+		$this->load->library('email', $config);
+		$this->email->initialize($config);
+
+		$this->email->from('dicaribapak11@gmail.com', 'Admin Siakad');
+		$this->email->to($this->input->post('penerima', true));
+        $this->email->subject('Panduan KRS');
+        $this->email->message('test');
+        if($this->email->send()){
+            $this->mod->m_save_send_email($post);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Email Berhasil Terkirim</div>');
+            redirect('akademik/email');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email Gagal Terkirim</div>');
+            redirect('akademik/email');
+        }
+    }
+
 }
