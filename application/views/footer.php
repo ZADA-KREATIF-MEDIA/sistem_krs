@@ -71,6 +71,41 @@
             });  
             $('.jam').mask('00:00');
         } );
+        <?php if(($this->uri->segment(1) == "mahasiswa") && ($this->uri->segment(2) == "krs")):?>
+            let lihatCatatan = (id) => {
+                $.ajax({
+                    url: "<?php echo base_url('mahasiswa/krs_catatan')?>",
+                    method: "POST",
+                    data: {id: id},
+                    success: function(res){
+                        let hasil = $.parseJSON(res);
+                        console.log(hasil);
+                        if(hasil['catatan'] == ""){
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'Belum ada catatan dari dosen'
+                            })
+                        }else{
+                            $("#catatanDosen").text(hasil['catatan']);
+                            $('#catatanModal').modal('show')
+                        }
+                    }
+                })
+            }
+        <?php endif;?>
+        <?php if(($this->uri->segment(1) == "mahasiswa") && ($this->uri->segment(2) == "portofolio")):?>
+            var semester
+            $("#semester").change(function(){
+                semester = $(this).val();
+                kirimSemester();
+            });
+
+            function kirimSemester(){
+                console.log(semester);
+                window.location.href = '<?php echo base_url(); ?>mahasiswa/portofolio/'+semester;
+            }
+       
+        <?php endif;?>
     </script>
 </body>
 

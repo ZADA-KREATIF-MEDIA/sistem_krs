@@ -5,6 +5,7 @@
     <?= $this->session->flashdata('message'); ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
+            <a href="<?php echo base_url('mahasiswa/krs_perwalian/');?><?php echo $this->session->userdata('mhs_id')."/".$this->session->userdata('mhs_id_dosen');?>" class="btn btn-dark">Perwalian</a>
             <a href="<?php echo base_url('mahasiswa/daftar_matakuliah')?>" class="btn btn-success float-right"><i class="fas fa-plus"></i>&nbsp;Ambil Matakuliah</a>
         </div>
         <div class="card-body">
@@ -19,6 +20,7 @@
                             <th>Kelas</th>
                             <th>SKS</th>
                             <th>Tipe</th>
+                            <th>Semester</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -34,6 +36,7 @@
                                 <td><?php echo $mat['kelas'];?></td>
                                 <td><?php echo $mat['sks'];?></td>
                                 <td><?php echo $mat['tipe'];?></td>
+                                <td><?php echo ucwords($mat['semester']);?></td>
                                 <td class="text-center">
                                     <a href="<?php echo base_url('mahasiswa/hapus_matakuliah_diambil/').$mat['id']?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                 </td>

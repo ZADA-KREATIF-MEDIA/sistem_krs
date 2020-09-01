@@ -57,12 +57,24 @@
                     <?php echo form_error('tipe', '<small class="form-text text-danger">', '</small>'); ?>
                 </div>
                 <div class="form-group col-12 col-md-6">
-                    <label for="status">Status</label>
-                    <select name="status" id="status" class="form-control">
-                        <option value="aktif">Aktif</option>
-                        <option value="tidak">Tidak</option>
-                    </select>
-                    <?php echo form_error('status', '<small class="form-text text-danger">', '</small>'); ?>
+                    <div class="row">
+                        <div class="col">
+                            <label for="semester">Semester</label>
+                            <select name="semester" id="semester" class="form-control">
+                                <option value="ganjil">Ganjil</option>
+                                <option value="genap">Genap</option>
+                            </select>
+                            <?php echo form_error('semester', '<small class="form-text text-danger">', '</small>'); ?>
+                        </div>
+                        <div class="col">
+                            <label for="status">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="aktif">Aktif</option>
+                                <option value="tidak">Tidak</option>
+                            </select>
+                            <?php echo form_error('status', '<small class="form-text text-danger">', '</small>'); ?>
+                        </div>
+                    </div>
                 </div>
             </div>
             <button class="btn btn-success text-uppercase">simpan</button>

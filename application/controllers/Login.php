@@ -70,6 +70,7 @@ class Login extends CI_Controller
                     //echo "sini";
                     $data = [
                         'mhs_id'    => $mahasiswa['id'],
+                        'mhs_id_dosen' => $mahasiswa['id_dosen'],
                         'mhs_nim'   => $mahasiswa['nim'],
                         'nama'      => $mahasiswa['nama'],
                         'level'     => 'mahasiswa'

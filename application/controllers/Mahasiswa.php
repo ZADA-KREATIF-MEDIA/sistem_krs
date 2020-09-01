@@ -17,14 +17,22 @@ class Mahasiswa extends CI_Controller
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
-        $this->load->view('mahasiswa/matakuliah.php');
+        $this->load->view('mahasiswa/matakuliah.php',$data);
         $this->load->view('footer.php');
     }
 
     public function daftar_matakuliah()
     {
         $data['halaman']    = "Data Matakuliah";
-        $data['matkul']     = $this->mod->m_get_matkul_belum_diambil();
+
+        $matkul_diambil     =  $this->mod->m_get_matkul_diambil();
+        // print('<pre>');print_r($matkul_diambil);
+        $i=0;
+        foreach($matkul_diambil as $val){
+            $post[$i] = $val['id_matkul'];
+            $i++;
+        }
+        $data['matkul']     = $this->mod->m_get_matkul_belum_diambil($post);
         // print('<pre>');print_r($data);exit();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
@@ -58,5 +66,65 @@ class Mahasiswa extends CI_Controller
         redirect('mahasiswa/matakuliah');
     }
 
+    public function krs()
+    {
+        $data['halaman']    = "Data Perwalian";
+        $data['perwalian']  = $this->mod->m_get_perwalian();
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('mahasiswa/daftar_perwalian.php',$data);
+        $this->load->view('footer.php');
+    }
+
+    public function krs_catatan()
+    {
+        $id = $this->input->post('id', true);
+        $data = $this->mod->m_get_krs_catatan($id);
+        echo json_encode($data);
+    }
+
+    public function krs_perwalian()
+    {
+        $id_mhs     = $this->uri->segment(3);
+        $id_dosen   = $this->uri->segment(4);
+        $post_krs = [
+            'id_mahasiswa'  => $id_mhs,
+            'id_dosen'      => $id_dosen
+        ];
+        // print('<pre>');print_r($post_krs);exit();
+        $this->mod->m_save_krs_perwalian($post_krs);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data KRS Berhasil Ditambah</div>');
+        redirect('mahasiswa/krs');
+    }
+
+    public function transkip_nilai()
+    {
+        $data['halaman']    = "Data Transkip Nilai";
+        $data['transkip']   = $this->mod->m_get_transkipnilai();
+        // print('<pre>');print_r($data);exit();
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('mahasiswa/daftar_transkip_nilai.php',$data);
+        $this->load->view('footer.php');
+    }
+
+    public function portofolio()
+    {
+        $data['halaman']    = "Data Portofolio";
+        $semester = $this->uri->segment(3);
+        if($semester != ""){
+            $data['transkip']   = $this->mod->m_get_portofolio($semester);
+        }else{
+            $data['transkip']   = $this->mod->m_get_transkipnilai();
+        }
+        // print('<pre>');print_r($data);exit();
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('mahasiswa/portofolio.php',$data);
+        $this->load->view('footer.php');
+    }
     
 }

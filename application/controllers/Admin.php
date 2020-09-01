@@ -9,10 +9,11 @@ class Admin extends CI_Controller
         $this->load->Model('M_admin','mod');
     }
 
+/*----------- Bagian Mahasiswa -------------*/
     public function mahasiswa()
     {
         $data['halaman']    = "Data Mahasiswa";
-        $data['mahasiswa']  = $this->mod->m_get_all_mahasiswa();
+        $data['mahasiswa']  = $this->mod->m_get_all_mahasiswa_plus_dosen();
         // print('<pre>');print_r($data);exit();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
@@ -24,6 +25,7 @@ class Admin extends CI_Controller
     public function tambah_mahasiswa()
     {
         $data['halaman']    = "TambahData Mahasiswa";
+        $data['dosen']      = $this->mod->m_get_all_dosen();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
@@ -40,6 +42,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('no_tlpn', 'Nomor Telephone', 'required|numeric');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('dosen_pembimbing', 'Dosen Pembimbing', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $data['halaman']    = "TambahData Mahasiswa";
@@ -58,7 +61,8 @@ class Admin extends CI_Controller
                 'tgl_masuk'=> date("Y-m-d"),
                 'nomor_telephone' => $this->input->post('no_tlpn', true),
                 'agama' => $this->input->post('agama', true),
-                'email' => $this->input->post('email', true)
+                'email' => $this->input->post('email', true),
+                'id_dosen' => $this->input->post('dosen_pembimbing')
             ];
             $this->mod->m_simpan_mahasiswa($post);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Tambah Data Mahasiswa Berhasil</div>');
@@ -72,6 +76,7 @@ class Admin extends CI_Controller
         $data['mahasiswa'] = $this->mod->m_get_mahasiswa_by($id);
         // print('<pre>');print_r($data);exit();
         $data['halaman']    = "Edit Data Mahasiswa";
+        $data['dosen']      = $this->mod->m_get_all_dosen();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
@@ -86,6 +91,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('no_tlpn', 'Nomor Telephone', 'required|numeric');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('dosen_pembimbing', 'Dosen Pembimbing', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $data['halaman']    = "Edit Data Mahasiswa";
@@ -104,7 +110,8 @@ class Admin extends CI_Controller
                 'tgl_masuk'=> date("Y-m-d"),
                 'nomor_telephone' => $this->input->post('no_tlpn', true),
                 'agama' => $this->input->post('agama', true),
-                'email' => $this->input->post('email', true)
+                'email' => $this->input->post('email', true),
+                'id_dosen' => $this->input->post('dosen_pembimbing')
             ];
             // print('<pre>');print_r($post);exit();
             $this->mod->m_update_mahasiswa($post);
@@ -121,6 +128,7 @@ class Admin extends CI_Controller
         redirect('admin/mahasiswa');
     }
 
+/*------------ Bagian Dosen -------------*/
     public function dosen()
     {
         $data['halaman']    = "Data Dosen";
@@ -244,6 +252,7 @@ class Admin extends CI_Controller
         redirect('admin/dosen');
     }
 
+/*----------- Bagian Akademik -----------*/
     public function akademik()
     {
         $data['halaman']    = "Data Akademik";
@@ -289,7 +298,7 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Akademik Berhasil Dihapus</div>');
         redirect('admin/akademik');
     }
-
+/*--------- Bagian Matakuliah ----------*/
     public function matakuliah()
     {
         $data['halaman']    = "Data Matakuliah";
@@ -320,6 +329,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('jam_selesai', 'Jam Selesai', 'required');
         $this->form_validation->set_rules('kelas', 'Kelas', 'required');
         $this->form_validation->set_rules('sks', 'SKS', 'required');
+        $this->form_validation->set_rules('semester', 'Semester', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $data['halaman']    = "Tambah Data Matakuliah";
@@ -336,7 +346,8 @@ class Admin extends CI_Controller
                 'jam_selesai'   => $this->input->post('jam_selesai', true),
                 'kelas'         => $this->input->post('kelas', true),
                 'sks'           => $this->input->post('sks', true),
-                'tipe'          => $this->input->post('tipe', true)
+                'tipe'          => $this->input->post('tipe', true),
+                'semester'      => $this->input->post('semester', true)
             ];
             // print('<pre>');print_r($post);exit();
             $this->mod->m_simpan_matakuliah($post);
@@ -365,6 +376,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('jam_selesai', 'Jam Selesai', 'required');
         $this->form_validation->set_rules('kelas', 'Kelas', 'required');
         $this->form_validation->set_rules('sks', 'SKS', 'required');
+        $this->form_validation->set_rules('semester', 'Semester', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $data['halaman']    = "Edit Data Matakuliah";
@@ -383,7 +395,8 @@ class Admin extends CI_Controller
                 'kelas'         => $this->input->post('kelas', true),
                 'sks'           => $this->input->post('sks', true),
                 'status'        => $this->input->post('status', true),
-                'tipe'          => $this->input->post('tipe', true)
+                'tipe'          => $this->input->post('tipe', true),
+                'semester'      => $this->input->post('semester', true)
             ];
             // print('<pre>');print_r($post);exit();
             $this->mod->m_update_matakuliah($post);
@@ -399,4 +412,61 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Matakuliah Berhasil Dihapus</div>');
         redirect('admin/matakuliah');
     }
+
+/*------------ Bagian Email -----------*/
+    public function email()
+    {
+        $data['halaman']    = "Data Email";
+        $data['email']      = $this->mod->m_get_all_email();
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('admin/email/index', $data);
+        $this->load->view('footer.php');
+    }
+
+    public function kirim_email()
+    {
+        $post = [
+            'penerima'      => $this->input->post('penerima', true),
+            'pengirim'      => $this->input->post('pengirim', true),
+            'isi'           => $this->input->post('pesan', true),
+            'tanggal_kirim' => date("Y-m-d H:i:s")
+        ];
+        // print('<pre>');print_r($post);exit();
+        $this->_sendEmail($post);
+    }
+
+    private function _sendEmail($post)
+    {
+
+        $config = [
+			'protocol' 	=> 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_user' => 'dicaribapak11@gmail.com',
+			'smtp_pass' => 'akuaku123',
+			'smtp_port' => 465,
+			'mailtype' 	=> 'html',
+			'charset' 	=> 'utf-8',
+			'newline'	 => "\r\n"
+		];
+
+		$this->load->library('email', $config);
+		$this->email->initialize($config);
+
+		$this->email->from('dicaribapak11@gmail.com', 'Admin Siakad');
+		$this->email->to($this->input->post('penerima', true));
+        $this->email->subject('Panduan KRS');
+        $this->email->message('test');
+        if($this->email->send()){
+            $this->mod->m_save_send_email($post);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Email Berhasil Terkirim</div>');
+            redirect('admin/email');
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email Gagal Terkirim</div>');
+            redirect('admin/email');
+        }
+    }
+
+
 }

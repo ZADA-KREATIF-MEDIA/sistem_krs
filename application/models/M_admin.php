@@ -11,6 +11,16 @@ Class M_admin extends CI_Model
         return $data;
     }
 
+    public function m_get_all_mahasiswa_plus_dosen()
+    {
+        $this->db->select('a.id AS id_mahasiswa, a.nim, a.nama AS nama_mahasiswa, a.jenis_kelamin AS jk_mahasiswa, a.nomor_telephone AS no_hp_mhs, a.tgl_masuk AS tgl_masuk_mahasiswa, b.nama AS nama_dosen')
+            ->from('mahasiswa AS a')
+            ->join('dosen AS b','b.id = a.id_dosen', 'left');
+        $query = $this->db->get_compiled_select();
+        $data  = $this->db->query($query)->result_array();
+        return $data;
+    }
+
     public function m_simpan_mahasiswa($post)
     {
         $this->db->insert('mahasiswa', $post);
@@ -175,4 +185,20 @@ Class M_admin extends CI_Model
         $this->db->query($query);
         return true;
     }
+
+    public function m_get_all_email()
+    {
+        $this->db->select()
+            ->from('email');
+        $query = $this->db->get_compiled_select();
+        $data  = $this->db->query($query)->result_array();
+        return $data;
+    }
+
+    public function m_save_send_email($post)
+    {
+        $this->db->insert('email', $post);
+        return true;
+    }
+
 }

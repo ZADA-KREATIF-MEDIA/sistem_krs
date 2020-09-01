@@ -19,6 +19,7 @@
                                 <th>Kelas</th>
                                 <th>SKS</th>
                                 <th>Tipe</th>
+                                <th>Semester</th>
                                 <th>Ambil</th>
                             </tr>
                         </thead>
@@ -34,6 +35,7 @@
                                     <td><?php echo $mat['kelas'];?></td>
                                     <td><?php echo $mat['sks'];?></td>
                                     <td><?php echo $mat['tipe'];?></td>
+                                    <td><?php echo ucwords($mat['semester']);?></td>
                                     <td class="text-center"><input type="checkbox" name="matkul_pilih[]" value="<?php echo $mat['id'];?>"></td>
                                 </tr>
                             <?php
