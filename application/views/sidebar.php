@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -96,9 +96,32 @@
             </li>
         <hr class="sidebar-divider d-none d-md-block">
     <?php endif;?>
+
+    <?php if($this->session->userdata('level') == "dosen"):?>
+        <hr class="sidebar-divider d-none d-md-block">
+            <div class="sidebar-heading">
+               MENU NAVIGASI DOSEN
+            </div>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('mahasiswa/matakuliah');?>">
+                <i class="fas fa-fw fa-book"></i>
+                <span>KRS Mahasiswa</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('mahasiswa/transkip_nilai');?>">
+                <i class="fas fa-fw fa-print"></i>
+                <span>Mata kuliah & Nilai</span></a>
+            </li>
+         
+        <hr class="sidebar-divider d-none d-md-block">
+    <?php endif;?>
     <?php if($this->session->userdata('level') == "akademik"):?>
         <hr class="sidebar-divider d-none d-md-block">
         <li class="nav-item">
+        <a class="nav-link" href="<?php echo base_url('akademik/matakuliah');?>">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Mata Kuliah</span>
+            </a>
             <a class="nav-link" href="<?php echo base_url('akademik/mahasiswa');?>">
                 <i class="fas fa-fw fa-user-graduate"></i>
                 <span>Mahasiswa</span>
