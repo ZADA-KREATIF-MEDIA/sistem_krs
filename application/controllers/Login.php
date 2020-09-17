@@ -99,9 +99,8 @@ class Login extends CI_Controller
             $this->load->view('login/header.php', $data);
             $this->load->view('login/login_dosen.php');
             $this->load->view('login/footer.php');
-        }
-        else
-        {
+        } else {
+            //  echo "here";exit();
             $nip = $this->input->post('nip',true);
             $password = $this->input->post('password',true);
             $dosen = $this->db->get_where('dosen', ['nip' => $nip])->row_array();

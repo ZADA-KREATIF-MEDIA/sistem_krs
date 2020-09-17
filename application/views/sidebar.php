@@ -26,19 +26,19 @@
                 Users
             </div>
             <!-- Nav Item - Users -->
-            <li class="nav-item">
+            <li class="nav-item <?php if($this->uri->segment(2) == "mahasiswa"){echo "active";}?>">
                 <a class="nav-link" href="<?php echo base_url('admin/mahasiswa');?>">
                     <i class="fas fa-fw fa-user-graduate"></i>
                     <span>Mahasiswa</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?php if($this->uri->segment(2) == "dosen"){echo "active";}?>">
                 <a class="nav-link" href="<?php echo base_url('admin/dosen');?>">
                     <i class="fas fa-fw fa-user-tie"></i>
                     <span>Dosen</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?php if($this->uri->segment(2) == "akademik"){echo "active";}?>">
                 <a class="nav-link" href="<?php echo base_url('admin/akademik');?>">
                     <i class="fas fa-fw fa-university"></i>
                     <span>Akademik</span>
@@ -50,7 +50,7 @@
             <div class="sidebar-heading">
                 Matakuliah
             </div>
-            <li class="nav-item">
+            <li class="nav-item <?php if($this->uri->segment(2) == "matakuliah"){echo "active";}?>">
                 <a class="nav-link" href="<?php echo base_url('admin/matakuliah');?>">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Matakuliah</span>
@@ -60,7 +60,7 @@
             <div class="sidebar-heading">
                 Email
             </div>
-            <li class="nav-item">
+            <li class="nav-item <?php if($this->uri->segment(2) == "email"){echo "active";}?>">
                 <a class="nav-link" href="<?php echo base_url('admin/email');?>">
                     <i class="fas fa-fw fa-envelope"></i>
                     <span>Email</span>
@@ -73,22 +73,22 @@
             <div class="sidebar-heading">
                 Matakuliah
             </div>
-            <li class="nav-item">
+            <li class="nav-item <?php if($this->uri->segment(2) == "matakuliah"){echo "active";}?>">
             <a class="nav-link" href="<?php echo base_url('mahasiswa/matakuliah');?>">
                 <i class="fas fa-fw fa-book"></i>
                 <span>Matakuliah</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?php if($this->uri->segment(2) == "transkip_nilai"){echo "active";}?>">
             <a class="nav-link" href="<?php echo base_url('mahasiswa/transkip_nilai');?>">
                 <i class="fas fa-fw fa-print"></i>
                 <span>Transkip Nilai</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?php if($this->uri->segment(2) == "portofolio"){echo "active";}?>">
             <a class="nav-link" href="<?php echo base_url('mahasiswa/portofolio');?>">
                 <i class="fas fa-fw fa-clipboard-list"></i>
                 <span>Portofolio</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <?php if($this->uri->segment(2) == "krs"){echo "active";}?>">
             <a class="nav-link" href="<?php echo base_url('mahasiswa/krs');?>">
                 <i class="fas fa-fw fa-clipboard"></i>
                 <span>Perwalian</span></a>

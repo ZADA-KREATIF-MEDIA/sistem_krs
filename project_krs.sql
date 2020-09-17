@@ -231,8 +231,9 @@ CREATE TABLE `matakuliah` (
   `sks` int NOT NULL,
   `tipe` enum('teori','praktik','praktikum') NOT NULL,
   `semester` enum('ganjil','genap') NOT NULL,
+  `id_dosen` bigint DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,7 +242,7 @@ CREATE TABLE `matakuliah` (
 
 LOCK TABLES `matakuliah` WRITE;
 /*!40000 ALTER TABLE `matakuliah` DISABLE KEYS */;
-INSERT INTO `matakuliah` VALUES (1,'TI0011','Kecerdasan Buatans','tidak','07:31','10:01',2,2,'teori','genap'),(2,'TI002','Kecerdasan Hekel','aktif','09:00','12:00',4,2,'praktik','genap'),(5,'TI003','Jancuk Ancuk','aktif','08:99','14:00',1,2,'praktik','ganjil'),(6,'TI004','Test','aktif','11:11','11:11',2,3,'praktik','ganjil'),(7,'TI005','Sistem Pakar','aktif','14:00','15:00',3,1,'teori','genap');
+INSERT INTO `matakuliah` VALUES (1,'TI0011','Kecerdasan Buatans','tidak','07:31','10:01',2,2,'teori','genap',NULL),(2,'TI002','Kecerdasan Hekel','aktif','09:00','12:00',4,2,'praktik','genap',NULL),(5,'TI003','Jancuk Ancuk','aktif','08:99','14:00',1,2,'praktik','ganjil',NULL),(6,'TI004','Test','aktif','11:11','11:11',2,3,'praktik','ganjil',3),(7,'TI005','Sistem Pakar','aktif','14:00','15:00',3,1,'teori','genap',3),(8,'TI006','Praktik Sistem Pakar','aktif','13:00','14:00',1,1,'praktik','ganjil',2);
 /*!40000 ALTER TABLE `matakuliah` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -305,4 +306,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-31 22:41:55
+-- Dump completed on 2020-09-17 23:15:34

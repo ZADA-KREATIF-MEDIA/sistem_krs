@@ -314,6 +314,8 @@ class Admin extends CI_Controller
     public function tambah_matakuliah()
     {
         $data['halaman']    = "Tambah Data Matakuliah";
+        $data['dosen'] = $this->mod->m_get_all_dosen();
+        // print('<pre>');print_r($data);exit();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
@@ -330,6 +332,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('kelas', 'Kelas', 'required');
         $this->form_validation->set_rules('sks', 'SKS', 'required');
         $this->form_validation->set_rules('semester', 'Semester', 'required');
+        $this->form_validation->set_rules('dosen_matkul', 'Dosen Matakuliah', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $data['halaman']    = "Tambah Data Matakuliah";
@@ -347,7 +350,8 @@ class Admin extends CI_Controller
                 'kelas'         => $this->input->post('kelas', true),
                 'sks'           => $this->input->post('sks', true),
                 'tipe'          => $this->input->post('tipe', true),
-                'semester'      => $this->input->post('semester', true)
+                'semester'      => $this->input->post('semester', true),
+                'id_dosen'      => $this->input->post('dosen_matkul', true)
             ];
             // print('<pre>');print_r($post);exit();
             $this->mod->m_simpan_matakuliah($post);
@@ -361,6 +365,7 @@ class Admin extends CI_Controller
         $data['halaman']    = "Edit Data Matakuliah";
         $id = $this->uri->segment(3);
         $data['matakuliah'] = $this->mod->m_get_matakuliah_by($id);
+        $data['dosen'] = $this->mod->m_get_all_dosen();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
@@ -377,6 +382,7 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('kelas', 'Kelas', 'required');
         $this->form_validation->set_rules('sks', 'SKS', 'required');
         $this->form_validation->set_rules('semester', 'Semester', 'required');
+        $this->form_validation->set_rules('dosen_matkul', 'Dosen Matakuliah', 'required');
         if ($this->form_validation->run() == FALSE)
         {
             $data['halaman']    = "Edit Data Matakuliah";
@@ -396,7 +402,8 @@ class Admin extends CI_Controller
                 'sks'           => $this->input->post('sks', true),
                 'status'        => $this->input->post('status', true),
                 'tipe'          => $this->input->post('tipe', true),
-                'semester'      => $this->input->post('semester', true)
+                'semester'      => $this->input->post('semester', true),
+                'id_dosen'      => $this->input->post('dosen_matkul', true)
             ];
             // print('<pre>');print_r($post);exit();
             $this->mod->m_update_matakuliah($post);

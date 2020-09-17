@@ -76,6 +76,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group col-12 col-md-6">
+                    <label for="dosen_matkul">Dosen Pengampu</label>
+                    <select name="dosen_matkul" id="dosen_matkul" class="form-control">
+                        <?php foreach($dosen as $dsn):?>
+                            <option value="<?php echo $dsn['id'];?>" <?php if($matakuliah['id_dosen']==$dsn['id']){ echo "selected"; }?>><?php echo $dsn['nama'];?></option>
+                        <?php endforeach;?>
+                    </select>
+                </div>
             </div>
             <input type="hidden" name="id" value="<?php echo $matakuliah['id'];?>">
             <button class="btn btn-success text-uppercase">simpan</button>
