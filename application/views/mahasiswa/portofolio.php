@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Data Portofolio</h1>
-    <?php echo form_open('mahasiswa/ambil_matkul');?>
+
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <select name="semester" id="semester">
@@ -40,6 +40,6 @@
                 </div>
             </div>
         </div>
-    <?php echo form_close();?>
+    
 </div>
 <!-- /.container-fluid -->
