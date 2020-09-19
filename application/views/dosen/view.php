@@ -81,6 +81,7 @@
     <div class="card shadow mb-4">
         <div class="card-header  bg-success py-3">
             <h6 class="m-0 font-weight-bold text-white">Mata kuliah di ambil Semester ini</h6>
+            
         </div>
         <?= $this->session->flashdata('message'); ?>
         <div class="card-body">
@@ -94,7 +95,6 @@
                             <th>Jam</th>
                             <th>Tipe</th>
                             <th>Nilai</th>
-                            
                         </tr>
                     </thead>
                     <tbody>
@@ -112,23 +112,14 @@
                                 if($mat['nilai']!=null)
                                 {
                                      echo $mat['nilai'];
-                                ?>
-                                   
-                                <?php
                                 }
                                 else
                                 {
-                                ?>
-                                     <div class="form-group">
-   <a data-toggle="modal" data-target="#tambah-data" class="btn btn-primary text-white">Tambah</a>
-  
-  </div>
-                                     
-                                <?php   
+                                    echo "belum ada nilai";
                                 }
-                                
                                 ?>
                                 </td>
+                                
                             </tr>
                         <?php
                             $i++;
@@ -141,83 +132,8 @@
     </div>
 </div>
 
-<!-- Begin Page Content -->
-<div class="container-fluid">
-    <!-- Page Heading -->
-    
-    
-        <div class="card bg-blue shadow mb-4">
-            <div class="card-header bg-primary py-3">
-            <h6 class="m-0 font-weight-bold text-white">Portofolio Akademik</h6>
-             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered"  width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Matakuliah</th>
-                                <th>SKS</th>
-                                <th>Nilai</th>
-                                <th>Semester</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                                $i = 1;
-                                $total_sks=0;
-                            foreach($transkip as $tr):?>
-                                <tr>
-                                    <td><?php echo $i;?></td>
-                                    <td><?php echo $tr['nama'];?></td>
-                                    <td><?php echo $tr['sks'];?></td>
-                                    <td><?php echo $tr['nilai'];?></td>
-                                    <td><?php echo ucwords($tr['semester']);?></td>
-                                </tr>
-                            <?php
-                                 $total_sks +=$tr['sks'];
-                                $i++;
-                            endforeach;?>
-                                <tr>
-                                <td colspan="2"><strong>TOTAL SKS</strong></td><td colspan="3"><strong><?= $total_sks ?></strong></td>
-                                </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-   
-</div>
 <!-- /.container-fluid -->
 <!-- /.container-fluid -->
 <!-- /.container-fluid -->
 
- <!-- Modal Tambah -->
- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="tambah-data" class="modal fade">
-     <div class="modal-dialog">
-         <div class="modal-content">
-             <div class="modal-header">
-                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                 <h4 class="modal-title">Tambah Data</h4>
-             </div>
-             <form class="form-horizontal" action="<?php echo base_url('akademik/input_nilai')?>" method="post" role="form">
-              <div class="modal-body">
-                      <div class="form-group">
-                      <input type="hidden" name="id_mahasiswa" value="<?php echo $mat['id_mahasiswa'];?>">
-                      
-                                    <input type="hidden" name="id_matkul" value="<?php echo $mat['id_matkul'];?>">
-                                    <input class="form-control" type="text" name="nilai" placeholder="Input nilai mahasiswa" style="text-transform:uppercase" pattern="[A-E]" required>
-                      </div>
-                   
-                  </div>
-                  <div class="modal-footer">
-                      <button class="btn btn-info" type="submit"> Simpan&nbsp;</button>
-                      <button type="button" class="btn btn-warning" data-dismiss="modal"> Batal</button>
-                  </div>
-                 </form>
-             </div>
-         </div>
-     </div>
- 
- 

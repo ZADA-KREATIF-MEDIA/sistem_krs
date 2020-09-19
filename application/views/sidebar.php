@@ -11,7 +11,6 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
-
     <!-- Nav Item - Dashboard -->
     <li class="nav-item <?php if($this->uri->segment(1)=="dashboard"){ echo "active"; }?>">
         <a class="nav-link" href="<?php echo base_url('dashboard')?>">
@@ -97,18 +96,23 @@
         <hr class="sidebar-divider d-none d-md-block">
     <?php endif;?>
 
-    <?php if($this->session->userdata('level') == "dosen"):?>
+    <?php if($this->session->userdata('level') == "dosen" || $this->session->userdata('level') == "sekjur" || $this->session->userdata('level') == "kajur") :?>
         <hr class="sidebar-divider d-none d-md-block">
             <div class="sidebar-heading">
                MENU NAVIGASI DOSEN
             </div>
             <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('mahasiswa/matakuliah');?>">
+            <a class="nav-link" href="<?php echo base_url('dosen/mahasiswa');?>">
                 <i class="fas fa-fw fa-book"></i>
-                <span>KRS Mahasiswa</span></a>
+                <span>Data Mahasiswa</span></a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('mahasiswa/transkip_nilai');?>">
+            <a class="nav-link" href="<?php echo base_url('dosen/krs');?>">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Data KRS Mahasiswa</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('dosen/matakuliah');?>">
                 <i class="fas fa-fw fa-print"></i>
                 <span>Mata kuliah & Nilai</span></a>
             </li>

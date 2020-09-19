@@ -4,9 +4,10 @@
     <h1 class="h3 mb-4 text-gray-800">Data Mahasiswa</h1>
     <?= $this->session->flashdata('message'); ?>
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <a href="<?php echo base_url('admin/tambah_mahasiswa')?>" class="btn btn-success float-right"><i class="fas fa-plus"></i>&nbsp;Tambah Mahasiswa</a>
+    <div class="card-header  bg-success py-3">
+            <h6 class="m-0 font-weight-bold text-white">Daftar Mahasiswa Bimbingan</h6>
         </div>
+        
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -19,7 +20,7 @@
                             <th>No Telephone</th>
                             <th>Tanggal Masuk</th>
                             <th>Dosen Pembimbing</th>
-                            <th>Aksi</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -42,11 +43,10 @@
                                         }
                                     ?>
                                 </td>
-                                <td class="text-center">
-                                <a href="<?php echo base_url('akademik/view_mahasiswa/').$mhs['id_mahasiswa']?>" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
+                                <!--<td class="text-center">
                                     <a href="<?php echo base_url('admin/edit_mahasiswa/').$mhs['id_mahasiswa']?>" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
                                     <a href="<?php echo base_url('admin/hapus_mahasiswa/').$mhs['id_mahasiswa']?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
-                                </td>
+                                </td>-->
                             </tr>
                         <?php
                             $i++;
