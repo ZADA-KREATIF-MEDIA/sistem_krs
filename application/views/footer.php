@@ -65,12 +65,14 @@
     <script src="<?php echo base_url('assets/'); ?>vendor/jquery-mask/src/jquery.mask.js"></script>
 
     <script>
-        $( function() {
-            $( "#tanggal_lahir" ).datepicker({
-                dateFormat: 'dd-mm-yy'
-            });  
-            $('.jam').mask('00:00');
-        } );
+        <?php if(($this->uri->segment(1) == "admin") && ($this->uri->segment(2) == "tambah_dosen")):?>
+            $( function() {
+                $( "#tanggal_lahir" ).datepicker({
+                    dateFormat: 'dd-mm-yy'
+                });  
+                $('.jam').mask('00:00');
+            } );
+        <?php endif;?>
         <?php if(($this->uri->segment(1) == "mahasiswa") && ($this->uri->segment(2) == "krs")):?>
             let lihatCatatan = (id) => {
                 $.ajax({
