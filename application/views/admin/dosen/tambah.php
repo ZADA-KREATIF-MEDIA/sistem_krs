@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group col-12 col-md-6">
                     <label for="tanggal_lahir">Tanggal Lahir</label>
-                    <input type="month" class="form-control" id="tanggal_lahir" name="tgl_lahir" placeholder="Tanggal Lahir">
+                    <input type="text" class="form-control" id="tanggal_lahir" name="tgl_lahir" placeholder="Tanggal Lahir">
                     <?php echo form_error('tgl_lahir', '<small class="form-text text-danger">', '</small>'); ?>
                 </div>
                 <div class="form-group col-12 col-md-6">
