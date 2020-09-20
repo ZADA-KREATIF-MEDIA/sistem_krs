@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -11,7 +11,6 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
-
     <!-- Nav Item - Dashboard -->
     <li class="nav-item <?php if($this->uri->segment(1)=="dashboard"){ echo "active"; }?>">
         <a class="nav-link" href="<?php echo base_url('dashboard')?>">
@@ -96,13 +95,39 @@
             </li>
         <hr class="sidebar-divider d-none d-md-block">
     <?php endif;?>
+
+    <?php if($this->session->userdata('level') == "dosen" || $this->session->userdata('level') == "sekjur" || $this->session->userdata('level') == "kajur") :?>
+        <hr class="sidebar-divider d-none d-md-block">
+            <div class="sidebar-heading">
+               MENU NAVIGASI DOSEN
+            </div>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('dosen/mahasiswa');?>">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Data Mahasiswa</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('dosen/krs');?>">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Data KRS Mahasiswa</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url('dosen/matakuliah');?>">
+                <i class="fas fa-fw fa-print"></i>
+                <span>Mata kuliah & Nilai</span></a>
+            </li>
+         
+        <hr class="sidebar-divider d-none d-md-block">
+    <?php endif;?>
     <?php if($this->session->userdata('level') == "akademik"):?>
         <hr class="sidebar-divider d-none d-md-block">
-<<<<<<< HEAD
         <li class="nav-item">
-=======
+          <a class="nav-link" href="<?php echo base_url('akademik/matakuliah');?>">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Mata Kuliah</span>
+            </a>
+        </li>
         <li class="nav-item <?php if($this->uri->segment(2) == "mahasiswa"){echo "active";}?>">
->>>>>>> 3de846a... update 17-09-2020
             <a class="nav-link" href="<?php echo base_url('akademik/mahasiswa');?>">
                 <i class="fas fa-fw fa-user-graduate"></i>
                 <span>Mahasiswa</span>
@@ -111,17 +136,13 @@
         <hr class="sidebar-divider d-none d-md-block">
         <div class="sidebar-heading">
                 Email
-            </div>
-<<<<<<< HEAD
-            <li class="nav-item">
-=======
-            <li class="nav-item <?php if($this->uri->segment(2) == "email"){echo "active";}?>">
->>>>>>> 3de846a... update 17-09-2020
-                <a class="nav-link" href="<?php echo base_url('akademik/email');?>">
-                    <i class="fas fa-fw fa-envelope"></i>
-                    <span>Email</span>
-                </a>
-            </li>
+        </div>
+        <li class="nav-item <?php if($this->uri->segment(2) == "email"){echo "active";}?>">
+              <a class="nav-link" href="<?php echo base_url('akademik/email');?>">
+                  <i class="fas fa-fw fa-envelope"></i>
+                  <span>Email</span>
+              </a>
+        </li>
     <?php endif;?>
 
 <!-- Nav Item - Tables -->

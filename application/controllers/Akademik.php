@@ -82,6 +82,48 @@ class Akademik extends CI_Controller
         $this->load->view('footer.php');
     }
 
+    public function view_mahasiswa()
+    {
+        $id = $this->uri->segment(3);
+        $semester = $this->uri->segment(4);        
+        $data['mahasiswa'] = $this->mod->m_get_mahasiswa_by($id);
+        // print('<pre>');print_r($data);exit();
+        $data['halaman']    = "View Data Mahasiswa";
+        $data['dosen']      = $this->mod->m_get_all_dosen();
+        $data['matkul_ambil'] = $this->mod->m_get_matkul_diambil($id);
+
+       
+        if($semester != ""){
+            $data['transkip']   = $this->mod->m_get_portofolio($semester,$id);
+        }else{
+            $data['transkip']   = $this->mod->m_get_transkipnilai($id);
+        }
+        // 
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('akademik/mahasiswa/view.php', $data);
+        $this->load->view('footer.php');
+    }
+
+    public function input_nilai()
+    {       
+            $id_mahasiswa=$this->input->post('id_mahasiswa', TRUE);
+
+            $post = [
+                'id_mahasiswa' => $this->input->post('id_mahasiswa', TRUE),
+                'nilai' => $this->input->post('nilai', TRUE),
+                'id_matkul' => $this->input->post('id_matkul', TRUE),
+                
+            ];
+            $this->mod->m_simpan_nilai($post);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Nilai berhasil di input</div>');
+            redirect("akademik/view_mahasiswa/"."$id_mahasiswa");
+        
+    }
+
+  
+
     public function update_mahasiswa()
     {
         $this->form_validation->set_rules('nama', 'Nama Mahasiswa', 'required');
@@ -178,6 +220,122 @@ class Akademik extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email Gagal Terkirim</div>');
             redirect('akademik/email');
         }
+    }
+
+
+    /*--------- Bagian Matakuliah ----------*/
+    public function matakuliah()
+    {
+        $data['halaman']    = "Data Matakuliah";
+        $data['matakuliah']  = $this->mod->m_get_all_matakuliah();
+        // print('<pre>');print_r($data);exit();
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('admin/matakuliah/index.php', $data);
+        $this->load->view('footer.php');
+    }
+
+    public function tambah_matakuliah()
+    {
+        $data['halaman']    = "Tambah Data Matakuliah";
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('admin/matakuliah/tambah.php', $data);
+        $this->load->view('footer.php');
+    }
+
+    public function simpan_matakuliah()
+    {
+        $this->form_validation->set_rules('kode_matkul', 'Kode Matakuliah', 'required');
+        $this->form_validation->set_rules('nama', 'Nama Matakuliah', 'required');
+        $this->form_validation->set_rules('jam_mulai', 'Jam Mulai', 'required');
+        $this->form_validation->set_rules('jam_selesai', 'Jam Selesai', 'required');
+        $this->form_validation->set_rules('kelas', 'Kelas', 'required');
+        $this->form_validation->set_rules('sks', 'SKS', 'required');
+        $this->form_validation->set_rules('semester', 'Semester', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data['halaman']    = "Tambah Data Matakuliah";
+            $this->load->view('head.php', $data);
+            $this->load->view('sidebar.php');
+            $this->load->view('header.php');
+            $this->load->view('admin/matakuliah/tambah.php', $data);
+            $this->load->view('footer.php');
+        }else{
+            $post = [
+                'kode_matkul'   => $this->input->post('kode_matkul', TRUE),
+                'nama'          => $this->input->post('nama', TRUE),
+                'jam_mulai'     => $this->input->post('jam_mulai', true),
+                'jam_selesai'   => $this->input->post('jam_selesai', true),
+                'kelas'         => $this->input->post('kelas', true),
+                'sks'           => $this->input->post('sks', true),
+                'tipe'          => $this->input->post('tipe', true),
+                'semester'      => $this->input->post('semester', true)
+            ];
+            // print('<pre>');print_r($post);exit();
+            $this->mod->m_simpan_matakuliah($post);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Tambah Data Matakuliah Berhasil</div>');
+            redirect('admin/matakuliah');
+        }
+    }
+
+    public function edit_matakuliah()
+    {
+        $data['halaman']    = "Edit Data Matakuliah";
+        $id = $this->uri->segment(3);
+        $data['matakuliah'] = $this->mod->m_get_matakuliah_by($id);
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('admin/matakuliah/edit.php', $data);
+        $this->load->view('footer.php');
+    }
+
+    public function update_matakuliah()
+    {
+        $this->form_validation->set_rules('kode_matkul', 'Kode Matakuliah', 'required');
+        $this->form_validation->set_rules('nama', 'Nama Matakuliah', 'required');
+        $this->form_validation->set_rules('jam_mulai', 'Jam Mulai', 'required');
+        $this->form_validation->set_rules('jam_selesai', 'Jam Selesai', 'required');
+        $this->form_validation->set_rules('kelas', 'Kelas', 'required');
+        $this->form_validation->set_rules('sks', 'SKS', 'required');
+        $this->form_validation->set_rules('semester', 'Semester', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data['halaman']    = "Edit Data Matakuliah";
+            $this->load->view('head.php', $data);
+            $this->load->view('sidebar.php');
+            $this->load->view('header.php');
+            $this->load->view('admin/matakuliah/tambah.php', $data);
+            $this->load->view('footer.php');
+        }else{
+            $post = [
+                'id'            => $this->input->post('id', true),
+                'kode_matkul'   => $this->input->post('kode_matkul', TRUE),
+                'nama'          => $this->input->post('nama', TRUE),
+                'jam_mulai'     => $this->input->post('jam_mulai', true),
+                'jam_selesai'   => $this->input->post('jam_selesai', true),
+                'kelas'         => $this->input->post('kelas', true),
+                'sks'           => $this->input->post('sks', true),
+                'status'        => $this->input->post('status', true),
+                'tipe'          => $this->input->post('tipe', true),
+                'semester'      => $this->input->post('semester', true)
+            ];
+            // print('<pre>');print_r($post);exit();
+            $this->mod->m_update_matakuliah($post);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Update Data Matakuliah Berhasil</div>');
+            redirect('admin/matakuliah');
+        }
+    }
+
+    public function hapus_matakuliah()
+    {
+        $id = $this->uri->segment(3);
+        $this->mod->m_hapus_matakuliah($id);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Matakuliah Berhasil Dihapus</div>');
+        redirect('admin/matakuliah');
     }
 
 }
