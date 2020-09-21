@@ -99,30 +99,33 @@
     <?php if($this->session->userdata('level') == "dosen" || $this->session->userdata('level') == "sekjur" || $this->session->userdata('level') == "kajur") :?>
         <hr class="sidebar-divider d-none d-md-block">
             <div class="sidebar-heading">
-               MENU NAVIGASI DOSEN
+                MENU NAVIGASI DOSEN
             </div>
-            <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('dosen/mahasiswa');?>">
-                <i class="fas fa-fw fa-book"></i>
-                <span>Data Mahasiswa</span></a>
+            <li class="nav-item <?php if($this->uri->segment(2) == "mahasiswa"){echo "active";}?>">
+                <a class="nav-link " href="<?php echo base_url('dosen/mahasiswa');?>">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Data Mahasiswa</span>
+                </a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('dosen/krs');?>">
-                <i class="fas fa-fw fa-book"></i>
-                <span>Data KRS Mahasiswa</span></a>
+            <li class="nav-item <?php if($this->uri->segment(2) == "krs"){echo "active";}?>">
+                <a class="nav-link " href="<?php echo base_url('dosen/krs');?>">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Data KRS Mahasiswa</span>
+                </a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url('dosen/matakuliah');?>">
-                <i class="fas fa-fw fa-print"></i>
-                <span>Mata kuliah & Nilai</span></a>
+            <li class="nav-item <?php if($this->uri->segment(2) == "matakuliah"){echo "active";}?>">
+                <a class="nav-link" href="<?php echo base_url('dosen/matakuliah');?>">
+                    <i class="fas fa-fw fa-print"></i>
+                    <span>Mata kuliah & Nilai</span>
+                </a>
             </li>
-         
+        
         <hr class="sidebar-divider d-none d-md-block">
     <?php endif;?>
     <?php if($this->session->userdata('level') == "akademik"):?>
         <hr class="sidebar-divider d-none d-md-block">
-        <li class="nav-item">
-          <a class="nav-link" href="<?php echo base_url('akademik/matakuliah');?>">
+        <li class="nav-item <?php if($this->uri->segment(2) == "matakuliah"){echo "active";}?>">
+            <a class="nav-link" href="<?php echo base_url('akademik/matakuliah');?>">
                 <i class="fas fa-fw fa-book"></i>
                 <span>Mata Kuliah</span>
             </a>
@@ -138,10 +141,10 @@
                 Email
         </div>
         <li class="nav-item <?php if($this->uri->segment(2) == "email"){echo "active";}?>">
-              <a class="nav-link" href="<?php echo base_url('akademik/email');?>">
-                  <i class="fas fa-fw fa-envelope"></i>
-                  <span>Email</span>
-              </a>
+            <a class="nav-link" href="<?php echo base_url('akademik/email');?>">
+                <i class="fas fa-fw fa-envelope"></i>
+                <span>Email</span>
+            </a>
         </li>
     <?php endif;?>
 
