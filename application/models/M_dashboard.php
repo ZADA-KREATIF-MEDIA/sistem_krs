@@ -49,4 +49,37 @@ Class M_dashboard extends CI_Model{
         return $data;
     }
 
+    public function m_get_matkul_diampu($id)
+    {
+        $this->db->select()
+            ->from('matakuliah')
+            ->where("id_dosen", $id);
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);exit;
+        $data  = $this->db->query($query)->num_rows();
+        return $data;
+    }
+
+    public function m_get_mahasiswa_bimbingan($id)
+    {
+        $this->db->select()
+            ->from('mahasiswa')
+            ->where("id_dosen", $id);
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);exit;
+        $data  = $this->db->query($query)->num_rows();
+        return $data;
+    }
+
+    public function m_get_perwalian($id)
+    {
+        $this->db->select()
+            ->from('krs_perwalian')
+            ->where("id_dosen", $id);
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);exit;
+        $data  = $this->db->query($query)->num_rows();
+        return $data;
+    }
+
 }

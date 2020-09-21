@@ -19,7 +19,11 @@ class Dashboard extends CI_Controller
         }else if($this->session->userdata('level') == "akademik"){
             $this->load->view('dashboard/index_akademik');
         }else if($this->session->userdata('level') == "dosen" || $this->session->userdata('level') == "kajur" || $this->session->userdata('level') == "sekjur"){
-            $this->load->view('dashboard/index_dosen');
+            $id = $this->session->userdata('dosen_id');
+            $data['matkul_diampu'] = $this->mod->m_get_matkul_diampu($id);
+            $data['mhs_bimbingan'] = $this->mod->m_get_mahasiswa_bimbingan($id);
+            $data['perwalian'] = $this->mod->m_get_perwalian($id);
+            $this->load->view('dashboard/index_dosen', $data);
         }else{
             $id = $this->session->userdata('mhs_id');
             $matkul_diambil     =  $this->mod->m_get_matkul_diambil();
