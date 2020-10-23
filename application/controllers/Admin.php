@@ -475,5 +475,29 @@ class Admin extends CI_Controller
         }
     }
 
+/*---------- Bagian Refrensi Semsester ----------*/
+    public function semester_aktif()
+    {
+        $data['halaman']    = "Semester Aktif";
+        $data['semester']   = $this->mod->m_get_semester_aktif();
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('admin/semester/index', $data);
+        $this->load->view('footer.php');
+    }
+
+    public function update_semester()
+    {
+        $post = [
+            'id'            => $this->input->post('id', true),
+            'semester'      => $this->input->post('semester', true),
+            'tahun_ajaran'  => $this->input->post('tahun_ajaran', true)
+        ];
+        // print('<pre>');print_r($post);exit();
+        $this->mod->m_update_semester($post);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Update Semester Berhasil</div>');
+        redirect('admin/semester_aktif');
+    }
 
 }

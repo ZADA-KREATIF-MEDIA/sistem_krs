@@ -24,6 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <?php if($matkul > 0 ):?>
                             <?php 
                                 $i = 1;
                                 foreach($matkul as $mat):?>
@@ -41,6 +42,7 @@
                             <?php
                                 $i++;
                                 endforeach;?>
+                        <?php endif;?>
                         </tbody>
                     </table>
                 </div>

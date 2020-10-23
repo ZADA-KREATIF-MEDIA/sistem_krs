@@ -31,7 +31,11 @@ class Mahasiswa extends CI_Controller
             $post[$i] = $val['id_matkul'];
             $i++;
         }
-        $data['matkul']     = $this->mod->m_get_matkul_belum_diambil($post);
+        if(count($matkul_diambil) > 0) {
+            $data['matkul']     = $this->mod->m_get_matkul_belum_diambil($post);
+        } else {
+            $data['matkul'] = $this->mod->m_get_matkul_all();
+        }
         // print('<pre>');print_r($data);exit();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
@@ -85,16 +89,24 @@ class Mahasiswa extends CI_Controller
 
     public function krs_perwalian()
     {
-        $id_mhs     = $this->uri->segment(3);
-        $id_dosen   = $this->uri->segment(4);
+        $id_mhs         = $this->uri->segment(3);
+        $id_dosen       = $this->uri->segment(4);
+        $dt_semester    = $this->mod->m_get_semester();
         $post_krs = [
             'id_mahasiswa'  => $id_mhs,
-            'id_dosen'      => $id_dosen
+            'id_dosen'      => $id_dosen,
+            'semester'      => $dt_semester['semester'],
+            'tahun_ajaran'  => $dt_semester['tahun_ajaran']
         ];
         // print('<pre>');print_r($post_krs);exit();
-        $this->mod->m_save_krs_perwalian($post_krs);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data KRS Berhasil Ditambah</div>');
-        redirect('mahasiswa/krs');
+        if($id_dosen == 0){
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Gagal Melakukan KRS, Karena Belum Memiliki Dosen Pembimbing</div>');
+            redirect('mahasiswa/matakuliah');
+        } else {
+            $this->mod->m_save_krs_perwalian($post_krs);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data KRS Berhasil Ditambah</div>');
+            redirect('mahasiswa/krs');
+        }
     }
 
     public function transkip_nilai()

@@ -60,7 +60,7 @@
                     <?php echo form_error('agama', '<small class="form-text text-danger">', '</small>'); ?>
                 </div>
                 <div class="form-group col-12 col-md-6">
-                    <label for="dosen_pembimbing">Jenis Kelamin</label>
+                    <label for="dosen_pembimbing">Dosen Pembimbing</label>
                     <select name="dosen_pembimbing" id="dosen_pembimbing" class="form-control">
                         <?php foreach($dosen as $dsn):?>
                             <option value="<?php echo $dsn['id']?>"><?php echo $dsn['nama'];?></option>

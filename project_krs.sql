@@ -87,7 +87,7 @@ CREATE TABLE `dosen` (
   `jabatan` enum('dosen','sekjur','kajur') NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `dosen` (
 
 LOCK TABLES `dosen` WRITE;
 /*!40000 ALTER TABLE `dosen` DISABLE KEYS */;
-INSERT INTO `dosen` VALUES (2,108881,'Cuk Subiantoro','laki-laki','janti1','1998-08-14','$2y$10$yIuxiJiV0xVoqgs26pPvJucmm./8O7qRzhOHLdtqSABXlLJBLLXl.','2020-08-11','08911','katholik','kajur','testuser1@mail.com'),(3,18976,'Koh Afuk S.Pd','perempuan','test','1978-08-26','$2y$10$6tNH5A3iX1v3iRMGLue8u.pyzqZE0QlhrbEWwB1VQmqdX86n/UDJy','2020-08-07','087111','hindu','sekjur','koh@mail.com');
+INSERT INTO `dosen` VALUES (2,108881,'Cuk Subiantoro','laki-laki','janti1','1998-08-14','$2y$10$yIuxiJiV0xVoqgs26pPvJucmm./8O7qRzhOHLdtqSABXlLJBLLXl.','2020-08-11','08911','katholik','kajur','testuser1@mail.com'),(3,18976,'Koh Afuk S.Pd','perempuan','test','1978-08-26','$2y$10$6tNH5A3iX1v3iRMGLue8u.pyzqZE0QlhrbEWwB1VQmqdX86n/UDJy','2020-08-07','087111','hindu','sekjur','koh@mail.com'),(6,10001,'Calvert Levin','laki-laki','asdf','2020-10-17','$2y$10$Hos6MBDnoHcxjKREbnZRx.cr0Gy/Ukd78dOFywVxLCM6DwHumy3D6','2020-10-17','089222','islam','dosen','calvert@mail.com');
 /*!40000 ALTER TABLE `dosen` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +114,7 @@ CREATE TABLE `email` (
   `isi` text,
   `tanggal_kirim` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ CREATE TABLE `email` (
 
 LOCK TABLES `email` WRITE;
 /*!40000 ALTER TABLE `email` DISABLE KEYS */;
-INSERT INTO `email` VALUES (1,'tegar.marcelino@gmail.com','admin','test','2020-08-31 00:00:00'),(2,'setiaendra18@gmail.com','admin','email di kirim dari sistem','2020-08-31 17:33:00'),(3,'setiaendra18@gmail.com','akademik','yang ngirim email ini bagian pengajaran melalui form kirim email','2020-08-31 17:37:58');
+INSERT INTO `email` VALUES (1,'tegar.marcelino@gmail.com','admin','test','2020-08-31 00:00:00'),(2,'setiaendra18@gmail.com','admin','email di kirim dari sistem','2020-08-31 17:33:00'),(3,'setiaendra18@gmail.com','akademik','yang ngirim email ini bagian pengajaran melalui form kirim email','2020-08-31 17:37:58'),(4,'setiaendra18@gmail.com','akademik','test krs sekarang di mitulungi','2020-09-25 15:13:25');
 /*!40000 ALTER TABLE `email` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,12 +139,12 @@ CREATE TABLE `krs_perwalian` (
   `id_mahasiswa` bigint NOT NULL,
   `id_dosen` bigint NOT NULL,
   `tgl_perwalian` date NOT NULL,
-  `tahun_ajaran` int NOT NULL,
-  `semester` int NOT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  `semester` enum('ganjil','genap') DEFAULT NULL,
   `catatan` text NOT NULL,
   `status` enum('0','1') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +153,7 @@ CREATE TABLE `krs_perwalian` (
 
 LOCK TABLES `krs_perwalian` WRITE;
 /*!40000 ALTER TABLE `krs_perwalian` DISABLE KEYS */;
-INSERT INTO `krs_perwalian` VALUES (1,3,2,'2020-08-17',0,0,'test','0');
+INSERT INTO `krs_perwalian` VALUES (1,3,2,'2020-08-17','0','','test','0'),(3,3,2,'0000-00-00','0','','','0'),(4,11,6,'2020-10-17','0','','','1'),(7,12,6,'2020-10-22','2020/2021','genap','test','1');
 /*!40000 ALTER TABLE `krs_perwalian` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +200,7 @@ CREATE TABLE `mahasiswa` (
   `email` varchar(255) NOT NULL,
   `id_dosen` bigint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,7 +209,7 @@ CREATE TABLE `mahasiswa` (
 
 LOCK TABLES `mahasiswa` WRITE;
 /*!40000 ALTER TABLE `mahasiswa` DISABLE KEYS */;
-INSERT INTO `mahasiswa` VALUES (2,155410021,'Pulung Nugroho Adi','$2y$10$Ht1Q.mvBVAh4TDYqYJr8Zu/pUB1uGCiUFhSmkt/8jHO8OElaEocgW','laki-laki','jahanam','2020-08-13','081900800700','islam','pulung@jancuk.com',3),(3,155410008,'Syaifudin Dwi K','$2y$10$5cDLXam95lCSL5nT5Zl15e5HyGXAk3E7LHxjqOe2H5rRv4QCeMB8C','laki-laki','godean','2020-08-13','087888999000','hindu','dwi@gmail.com',2),(6,155410035,'Devi Ariana Putri','$2y$10$P31L/MaPOrcuqWXSggnN3.nvX0guK2Oggtb2T8Pv1vnkW5P5o3KfO','perempuan','watumalang','2020-08-13','078','islam','devi@mail.com',2),(7,155410018,'Frangky Novan','$2y$10$pOzDkeBI3D44MGJxWdqsjOcmSsgac9aanJEsbPR5NRYB2qC9WvXTu','laki-laki','asdf','2020-08-13','007','kristen','frangky@mail.com',3);
+INSERT INTO `mahasiswa` VALUES (2,155410021,'Pulung Nugroho Adi','$2y$10$Ht1Q.mvBVAh4TDYqYJr8Zu/pUB1uGCiUFhSmkt/8jHO8OElaEocgW','laki-laki','jahanam','2020-08-13','081900800700','islam','pulung@jancuk.com',3),(3,155410008,'Syaifudin Dwi K','$2y$10$5cDLXam95lCSL5nT5Zl15e5HyGXAk3E7LHxjqOe2H5rRv4QCeMB8C','laki-laki','godean','2020-08-13','087888999000','hindu','dwi@gmail.com',2),(6,155410035,'Devi Ariana Putri','$2y$10$P31L/MaPOrcuqWXSggnN3.nvX0guK2Oggtb2T8Pv1vnkW5P5o3KfO','perempuan','watumalang','2020-08-13','078','islam','devi@mail.com',2),(7,155410018,'Frangky Novan','$2y$10$pOzDkeBI3D44MGJxWdqsjOcmSsgac9aanJEsbPR5NRYB2qC9WvXTu','laki-laki','asdf','2020-08-13','007','kristen','frangky@mail.com',3),(9,15541004,'Endra Setiawan','$2y$10$varoji6V0DWYil3P/ZEQD.rSnwMWbURg7aKrPyEVkQLrexOgTHLy6','laki-laki','asdf','2020-09-25','087111222333','konghucu','endra@mail.com',3),(10,155410001,'Ali Muamar','$2y$10$uWh3S6DzVP6DuM8r84vuOOM63B25V8ljGbq98SHXzczTUBasAQXKy','laki-laki','asdasf','2020-10-09','0123','islam','ali@mail.com',2),(11,145410010,'Bayu Dwi','$2y$10$yiOLTzESAv9MV06wlltMjOCnLcq4MwIURiG3iKlqiZbYynwp8zY1e','laki-laki','asdf','2020-10-17','098765','islam','bayu@mail.com',6),(12,155410002,'Yukihira No Souma','$2y$10$izQcUneAvfCdH9X6CczPS.LTPQNv6xCsjs08TkcpzjPsKnKGggqiu','laki-laki','toushen','2020-10-22','001','konghucu','yukihira@mail.com',6);
 /*!40000 ALTER TABLE `mahasiswa` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +242,7 @@ CREATE TABLE `matakuliah` (
 
 LOCK TABLES `matakuliah` WRITE;
 /*!40000 ALTER TABLE `matakuliah` DISABLE KEYS */;
-INSERT INTO `matakuliah` VALUES (1,'TI0011','Kecerdasan Buatans','tidak','07:31','10:01',2,2,'teori','genap',NULL),(2,'TI002','Kecerdasan Hekel','aktif','09:00','12:00',4,2,'praktik','genap',NULL),(5,'TI003','Jancuk Ancuk','aktif','08:99','14:00',1,2,'praktik','ganjil',NULL),(6,'TI004','Test','aktif','11:11','11:11',2,3,'praktik','ganjil',3),(7,'TI005','Sistem Pakar','aktif','14:00','15:00',3,1,'teori','genap',3),(8,'TI006','Praktik Sistem Pakar','aktif','13:00','14:00',1,1,'praktik','ganjil',2);
+INSERT INTO `matakuliah` VALUES (1,'TI0011','Kecerdasan Buatans','tidak','07:31','10:01',2,2,'teori','genap',NULL),(2,'TI002','Kecerdasan Hekel','aktif','09:00','12:00',4,2,'praktik','genap',2),(5,'TI003','Jancuk Ancuk','aktif','08:99','14:00',1,2,'praktik','ganjil',2),(6,'TI004','Test','aktif','11:11','11:11',2,3,'praktik','ganjil',3),(7,'TI005','Sistem Pakar','aktif','14:00','15:00',3,1,'teori','genap',3),(8,'TI006','Praktik Sistem Pakar','aktif','13:00','14:00',1,1,'praktik','ganjil',2);
 /*!40000 ALTER TABLE `matakuliah` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +258,7 @@ CREATE TABLE `matakuliah_diambil` (
   `id_matakuliah` bigint NOT NULL,
   `id_mahasiswa` bigint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,8 +267,33 @@ CREATE TABLE `matakuliah_diambil` (
 
 LOCK TABLES `matakuliah_diambil` WRITE;
 /*!40000 ALTER TABLE `matakuliah_diambil` DISABLE KEYS */;
-INSERT INTO `matakuliah_diambil` VALUES (4,1,3),(7,6,3);
+INSERT INTO `matakuliah_diambil` VALUES (4,1,3),(7,6,3),(9,1,11);
 /*!40000 ALTER TABLE `matakuliah_diambil` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `refrensi_tahun_ajaran`
+--
+
+DROP TABLE IF EXISTS `refrensi_tahun_ajaran`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `refrensi_tahun_ajaran` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `semester` enum('ganjil','genap') DEFAULT NULL,
+  `tahun_ajaran` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `refrensi_tahun_ajaran`
+--
+
+LOCK TABLES `refrensi_tahun_ajaran` WRITE;
+/*!40000 ALTER TABLE `refrensi_tahun_ajaran` DISABLE KEYS */;
+INSERT INTO `refrensi_tahun_ajaran` VALUES (1,'genap','2020/2021');
+/*!40000 ALTER TABLE `refrensi_tahun_ajaran` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -306,4 +331,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-17 23:15:34
+-- Dump completed on 2020-10-23 10:05:50
