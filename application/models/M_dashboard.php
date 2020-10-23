@@ -2,6 +2,26 @@
 if(!defined('BASEPATH')) exit('No direct script access allowed');
 Class M_dashboard extends CI_Model{
     
+    public function m_get_total_matkul()
+    {
+        $this->db->select()
+            ->from('matakuliah');
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);exit;
+        $data  = $this->db->query($query)->num_rows();
+        return $data;
+    }
+
+    public function m_get_total_akademik()
+    {
+        $this->db->select()
+            ->from('akademik');
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);exit;
+        $data  = $this->db->query($query)->num_rows();
+        return $data;
+    }
+
     public function m_get_matkul_diambil()
     {
         $this->db->select("a.id, b.id AS id_matkul, b.kode_matkul, b.nama, b.jam_mulai, b.jam_selesai, b.kelas, b.sks, b.tipe, b.semester")
@@ -26,6 +46,7 @@ Class M_dashboard extends CI_Model{
         return $data;
     }
 
+
     public function m_total_matkul_diambil()
     {
         $this->db->select("a.id, b.id AS id_matkul, b.kode_matkul, b.nama, b.jam_mulai, b.jam_selesai, b.kelas, b.sks, b.tipe, b.semester")
@@ -42,7 +63,7 @@ Class M_dashboard extends CI_Model{
     {
         $this->db->select()
             ->from('krs_perwalian')
-            ->where("id", $id);
+            ->where("id_mahasiswa", $id);
         $query = $this->db->get_compiled_select();
         // print('<pre>');print_r($query);exit;
         $data  = $this->db->query($query)->num_rows();

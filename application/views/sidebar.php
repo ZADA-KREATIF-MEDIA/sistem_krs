@@ -56,6 +56,12 @@
                     <span>Matakuliah</span>
                 </a>
             </li>
+            <li class="nav-item <?php if($this->uri->segment(2) == "semester_aktif"){echo "active";}?>">
+                <a class="nav-link" href="<?php echo base_url('admin/semester_aktif');?>">
+                    <i class="fas fa-clipboard-check"></i>
+                    <span>Semester Aktif</span>
+                </a>
+            </li>
         <hr class="sidebar-divider">
             <div class="sidebar-heading">
                 Email
@@ -124,6 +130,9 @@
     <?php endif;?>
     <?php if($this->session->userdata('level') == "akademik"):?>
         <hr class="sidebar-divider d-none d-md-block">
+        <div class="sidebar-heading">
+            Akademik
+        </div>
         <li class="nav-item <?php if($this->uri->segment(2) == "matakuliah"){echo "active";}?>">
             <a class="nav-link" href="<?php echo base_url('akademik/matakuliah');?>">
                 <i class="fas fa-fw fa-book"></i>
@@ -134,6 +143,12 @@
             <a class="nav-link" href="<?php echo base_url('akademik/mahasiswa');?>">
                 <i class="fas fa-fw fa-user-graduate"></i>
                 <span>Mahasiswa</span>
+            </a>
+        </li>
+        <li class="nav-item <?php if($this->uri->segment(2) == "semester_aktif"){echo "active";}?>">
+            <a class="nav-link" href="<?php echo base_url('akademik/semester_aktif');?>">
+                <i class="fas fa-fw fas fa-clipboard-check"></i>
+                <span>Semester Aktif</span>
             </a>
         </li>
         <hr class="sidebar-divider d-none d-md-block">

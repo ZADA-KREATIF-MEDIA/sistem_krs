@@ -25,7 +25,11 @@
                             foreach($perwalian as $per):?>
                                 <tr>
                                     <td><?php echo $i;?></td>
-                                    <td><?php echo date("Y-m-d", strtotime($per['tgl_perwalian']));?></td>
+                                    <?php if($per['tgl_perwalian'] == "0000-00-00"):?>
+                                        <td>-</td>
+                                    <?php else:?>
+                                        <td><?php echo date("Y-m-d", strtotime($per['tgl_perwalian']));?></td>
+                                    <?php endif;?>
                                     <td><?php echo $per['tahun_ajaran'];?></td>
                                     <td><?php echo $per['semester'];?></td>
                                     <td>

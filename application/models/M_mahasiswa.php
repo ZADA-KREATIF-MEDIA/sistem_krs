@@ -82,6 +82,15 @@ Class M_mahasiswa extends CI_Model
         $data  = $this->db->query($query)->row_array();
         return $data;
     }
+    
+    public function m_get_matkul_all()
+    {
+        $this->db->select()
+                ->from('matakuliah');
+        $query = $this->db->get_compiled_select();
+        $data = $this->db->query($query)->result_array();
+        return $data;
+    }
 
     public function m_get_transkipnilai()
     {
@@ -105,6 +114,17 @@ Class M_mahasiswa extends CI_Model
         $query = $this->db->get_compiled_select();
         // print('<pre>');print_r($query);exit;
         $data  = $this->db->query($query)->result_array();
+        return $data;
+    }
+
+    public function m_get_semester()
+    {
+        $this->db->select()
+            ->from('refrensi_tahun_ajaran')
+            ->where("id = 1");
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);exit;
+        $data  = $this->db->query($query)->row_array();
         return $data;
     }
 }

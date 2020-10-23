@@ -15,9 +15,14 @@ class Dashboard extends CI_Controller
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
         if($this->session->userdata('level') == "admin"){
-            $this->load->view('dashboard/index.php');
+            $data['matkul'] = $this->mod->m_get_total_matkul();
+            $data['akademik'] = $this->mod->m_get_total_akademik();
+            // print('<pre>');print_r($data);exit();
+            $this->load->view('dashboard/index.php', $data);
         }else if($this->session->userdata('level') == "akademik"){
-            $this->load->view('dashboard/index_akademik');
+            $data['matkul'] = $this->mod->m_get_total_matkul();
+            $data['akademik'] = $this->mod->m_get_total_akademik();
+            $this->load->view('dashboard/index_akademik', $data);
         }else if($this->session->userdata('level') == "dosen" || $this->session->userdata('level') == "kajur" || $this->session->userdata('level') == "sekjur"){
             $id = $this->session->userdata('dosen_id');
             $data['matkul_diampu'] = $this->mod->m_get_matkul_diampu($id);
@@ -32,7 +37,12 @@ class Dashboard extends CI_Controller
                 $post[$i] = $val['id_matkul'];
                 $i++;
             }
-            $data['matkul_belum_diambil']       = $this->mod->m_get_matkul_belum_diambil($post);
+            // print('<pre>');print_r(count($matkul_diambil));exit();
+            if(count($matkul_diambil) > 0) {
+                $data['matkul_belum_diambil']       = $this->mod->m_get_matkul_belum_diambil($post);
+            } else {
+                $data['matkul_belum_diambil'] = 0;
+            }
             $data['matkul_diambil']             = $this->mod->m_total_matkul_diambil();
             $data['catatan_krs']                = $this->mod->m_get_total_krs_catatan($id);
             // print('<pre>');print_r($data);exit();

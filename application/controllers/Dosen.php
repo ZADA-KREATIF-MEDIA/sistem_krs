@@ -103,10 +103,10 @@ class Dosen extends CI_Controller
 
     public function status_krs()
     {
-        
-
+        $tgl_sekarang = date("Y-m-d");
         $post = [
             'id' => $this->input->post('id', TRUE),
+            'tgl_perwalian' => $tgl_sekarang,
             'status' => $this->input->post('status', TRUE),
         ];
         $this->mod->m_update_status($post);
