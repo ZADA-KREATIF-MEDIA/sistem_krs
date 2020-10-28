@@ -10,24 +10,27 @@
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Selamat Datang</h1>
+                                    <h5 class="h4 text-gray-900 mb-4">Login Sebagai</h5>
                                 </div>
-                                <form class="user">
-                                    <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Masukkan Nomor Induk">
+                                <div class="row">
+                                    <div class="col-12 col-md-4">
+                                        <a href="<?php echo base_url('login/mahasiswa');?>">
+                                            <img src="<?php echo base_url('assets/img/siswa.png')?>" alt="mahasiswa" class="img-fluid">
+                                            <h5 class="text-center mt-2">Mahasiswa</h5>
+                                        </a>
                                     </div>
-                                    <div class="form-group">
-                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Masukkan Password">
+                                    <div class="col-12 col-md-4">
+                                        <a href="<?php echo base_url('login/dosen')?>">
+                                            <img src="<?php echo base_url('assets/img/dosen.png')?>" alt="dosen" class="img-fluid">
+                                            <h5 class="text-center mt-2">Dosen</h5>
+                                        </a>
                                     </div>
-                                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                    Login
-                                    </a>
-                                </form>
-                                <hr>
-                                <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                </div>
-                                <div class="text-center">
-                                    <a class="small" href="<?php echo base_url('login/register')?>">Daftar Sebagai Mahasiswa</a>
+                                    <div class="col-12 col-md-4">
+                                        <a href="<?php echo base_url('login/akademik')?>">
+                                            <img src="<?php echo base_url('assets/img/pengajaran.png')?>" alt="mahasiswa" class="img-fluid">
+                                            <h5 class="text-center mt-2">Pengajaran</h5>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

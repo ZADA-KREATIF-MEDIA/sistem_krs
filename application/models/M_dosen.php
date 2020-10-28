@@ -186,11 +186,11 @@ Class M_dosen extends CI_Model
 
     public function m_get_matkul_diambil_dosen_by($id)
     {
-        $this->db->select("a.id, mhs.nim, mhs.nama, tn.nilai")
-            ->from('matakuliah_diambil AS a')
-            ->join('mahasiswa AS mhs', 'mhs.id = a.id_mahasiswa', 'left')
-            ->join('transkip_nilai AS tn', 'tn.id_matkul = a.id_matakuliah', 'left')
-            ->where("a.id_matakuliah", $id);
+        $this->db->select("c.nim, c.nama, a.nilai")
+            ->from('transkip_nilai AS a')
+            ->join('matakuliah_diambil AS b', 'a.id_matkul_diambil = b.id', 'left')
+            ->join('mahasiswa AS c', 'a.id_mahasiswa = c.id', 'left')
+            ->where("b.id_matakuliah", $id);
         $query = $this->db->get_compiled_select();
         // print('<pre>');print_r($query);exit;
         $data  = $this->db->query($query)->result_array();
