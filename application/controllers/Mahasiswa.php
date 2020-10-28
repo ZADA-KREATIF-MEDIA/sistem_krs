@@ -24,19 +24,23 @@ class Mahasiswa extends CI_Controller
     public function daftar_matakuliah()
     {
         $data['halaman']    = "Data Matakuliah";
+        $semester_aktif     = $this->mod->m_get_semester();
         $matkul_diambil     =  $this->mod->m_get_matkul_diambil();
-        // print('<pre>');print_r($matkul_diambil);
+
         $i=0;
         foreach($matkul_diambil as $val){
-            $post[$i] = $val['id_matkul'];
+            $post[$i] = [
+                'id' => $val['id_matkul'],
+                'semester' => $semester_aktif['semester']
+        ];
             $i++;
         }
         if(count($matkul_diambil) > 0) {
+            // print('<pre>');print_r($post);exit();
             $data['matkul']     = $this->mod->m_get_matkul_belum_diambil($post);
         } else {
-            $data['matkul'] = $this->mod->m_get_matkul_all();
+            $data['matkul'] = $this->mod->m_get_matkul_all($semester_aktif['semester']);
         }
-        // print('<pre>');print_r($data);exit();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
@@ -55,8 +59,17 @@ class Mahasiswa extends CI_Controller
             ];
             $i++;
         }
-        // print('<pre>');print_r($post);exit();
-        $this->mod->m_simpan_ambil_matkul($post);
+        $id_matkul = $this->mod->m_simpan_ambil_matkul($post);
+        $j = 0;
+        foreach($id_matkul as $im){
+            $kirim[$j] = [
+                'id_matkul_diambil' => $im,
+                'id_mahasiswa'  => $this->session->userdata('mhs_id')
+            ];
+            $j++;
+        }
+        $this->mod->m_simpan_id_transkip_nilai($kirim);
+        // print('<pre>');print_r($id_matkul);exit();
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Matakuliah Berhasil Di tambah</div>');
         redirect('mahasiswa/matakuliah');
     }
@@ -65,6 +78,7 @@ class Mahasiswa extends CI_Controller
     {
         $id = $this->uri->segment(3);
         $this->mod->m_hapus_matakuliah_diambil($id);
+        $this->mod->m_hapus_matkul_transkip($id);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Matakuliah Berhasil Dihapus</div>');
         redirect('mahasiswa/matakuliah');
     }

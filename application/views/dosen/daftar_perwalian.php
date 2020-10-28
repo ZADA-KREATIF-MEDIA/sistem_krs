@@ -106,8 +106,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title">Setujui KRS</h6>
                     <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                    <h6 class="modal-title">Setujui KRS</h6>
                 </div>
                 <form class="form-horizontal" action="<?php echo base_url('dosen/status_krs')?>" method="post" role="form">
                     <div class="modal-body">

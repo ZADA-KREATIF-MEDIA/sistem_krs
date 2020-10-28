@@ -61,9 +61,11 @@ Class M_dashboard extends CI_Model{
 
     public function m_get_total_krs_catatan($id)
     {
+        $tgl = "0000-00-00";
         $this->db->select()
             ->from('krs_perwalian')
-            ->where("id_mahasiswa", $id);
+            ->where("id_mahasiswa", $id)
+            ->where("tgl_perwalian != ",$tgl);
         $query = $this->db->get_compiled_select();
         // print('<pre>');print_r($query);exit;
         $data  = $this->db->query($query)->num_rows();
