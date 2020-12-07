@@ -87,6 +87,9 @@ class Mahasiswa extends CI_Controller
     {
         $data['halaman']    = "Data Perwalian";
         $data['perwalian']  = $this->mod->m_get_perwalian();
+        $id_dosen = $this->session->userdata('mhs_id_dosen');
+        $data['wa_dosen'] = "62".substr($this->mod->m_get_data_dosen($id_dosen),1);
+        // print('<pre>');print_r($data);exit();
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');

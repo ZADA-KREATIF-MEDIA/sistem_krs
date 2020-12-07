@@ -77,11 +77,11 @@ class Login extends CI_Controller
                 if(password_verify($password, $mahasiswa['password'])) {
                     //echo "sini";
                     $data = [
-                        'mhs_id'    => $mahasiswa['id'],
-                        'mhs_id_dosen' => $mahasiswa['id_dosen'],
-                        'mhs_nim'   => $mahasiswa['nim'],
-                        'nama'      => $mahasiswa['nama'],
-                        'level'     => 'mahasiswa'
+                        'mhs_id'        => $mahasiswa['id'],
+                        'mhs_id_dosen'  => $mahasiswa['id_dosen'],
+                        'mhs_nim'       => $mahasiswa['nim'],
+                        'nama'          => $mahasiswa['nama'],
+                        'level'         => 'mahasiswa'
                     ];
                     $this->session->set_userdata($data);
                     redirect('/dashboard');

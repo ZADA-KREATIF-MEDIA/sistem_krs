@@ -5,6 +5,7 @@
     <?php echo form_open('mahasiswa/ambil_matkul');?>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
+            <a href="https://wa.me/<?= $wa_dosen ?>" target="_blank" class="btn btn-success float-right"><i class="fab fa-whatsapp mr-1"></i>Whatsapp Dosen</a>.
             </div>
             <div class="card-body">
                 <div class="table-responsive">

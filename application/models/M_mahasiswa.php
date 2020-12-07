@@ -123,7 +123,7 @@ Class M_mahasiswa extends CI_Model
 
     public function m_get_portofolio($semester)
     {
-        $this->db->select("a.id,b.nama,a.nilai, b.semester")
+        $this->db->select("b.id,b.nama,a.nilai, b.semester")
             ->from('transkip_nilai AS a')
             ->join('matakuliah AS b','b.id = a.id_matkul')
             ->where("id_mahasiswa", $this->session->userdata('mhs_id'))
@@ -143,6 +143,16 @@ Class M_mahasiswa extends CI_Model
         // print('<pre>');print_r($query);exit;
         $data  = $this->db->query($query)->row_array();
         return $data;
+    }
+
+    public function m_get_data_dosen($id_dosen)
+    {
+        $this->db->select('nomor_telephone')
+            ->from('dosen')
+            ->where('id',$id_dosen);
+        $query = $this->db->get_compiled_select();
+        $data = $this->db->query($query)->row_array();
+        return $data['nomor_telephone'];
     }
 
 }

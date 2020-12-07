@@ -61,7 +61,6 @@ class Dosen extends CI_Controller
         $data['dosen']      = $this->mod->m_get_all_dosen();
         $data['matkul_ambil'] = $this->mod->m_get_matkul_diambil($id);
 
-       
         if($semester != ""){
             $data['transkip']   = $this->mod->m_get_portofolio($semester,$id);
         }else{
@@ -74,12 +73,11 @@ class Dosen extends CI_Controller
         $this->load->view('dosen/view.php', $data);
         $this->load->view('footer.php');
     }
+
     public function view_mahasiswa()
     {
         $id = $this->uri->segment(3);
-     ;
         $data['halaman']    = "View Data Mahasiswa";
-     
         $data['matkul_ambil'] = $this->mod->m_get_matkul_diambil_dosen_by($id);
 
         $this->load->view('head.php', $data);
