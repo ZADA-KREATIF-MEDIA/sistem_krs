@@ -71,7 +71,11 @@
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Total Matakuliah</div>
+<<<<<<< HEAD
             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $matkul;?></div>
+=======
+            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $this->db->count_all_results('matakuliah');?></div>
+>>>>>>> 197e846... update 09-10-2020
           </div>
           <div class="col-auto">
             <i class="fas fa-book fa-2x text-gray-300"></i>
