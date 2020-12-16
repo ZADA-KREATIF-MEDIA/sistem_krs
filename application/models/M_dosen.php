@@ -173,11 +173,15 @@ Class M_dosen extends CI_Model
 
     public function m_get_matkul_diambil($id)
     {
-        $this->db->select("a.id, a.id_mahasiswa, tn.nilai, b.id AS id_matkul, b.kode_matkul, b.nama, b.jam_mulai, b.jam_selesai, b.kelas, b.sks, b.tipe, b.semester")
-            ->from('matakuliah_diambil AS a')
-            ->join('matakuliah AS b', 'b.id = a.id_matakuliah', 'left')
-            ->join('transkip_nilai AS tn', 'tn.id_matkul = a.id_matakuliah', 'left')
-            ->where("a.id_mahasiswa", $id);
+        // $this->db->select("a.id, a.id_mahasiswa, tn.nilai, b.id AS id_matkul, b.kode_matkul, b.nama, b.jam_mulai, b.jam_selesai, b.kelas, b.sks, b.tipe, b.semester")
+        //     ->from('matakuliah_diambil AS a')
+        //     ->join('matakuliah AS b', 'b.id = a.id_matakuliah', 'left')
+        //     ->join('transkip_nilai AS tn', 'tn.id_matkul = a.id_matakuliah', 'left')
+        //     ->where("a.id_mahasiswa", $id);
+        $this->db->select("a.id_matkul_diambil,b.nama,a.nilai, b.sks,b.semester, b.kode_matkul, b.jam_mulai, b.jam_selesai, b.tipe")
+            ->from('transkip_nilai AS a')
+            ->join('matakuliah AS b','b.id = a.id_matkul')
+            ->where("id_mahasiswa", $id);
         $query = $this->db->get_compiled_select();
         // print('<pre>');print_r($query);exit;
         $data  = $this->db->query($query)->result_array();
@@ -219,7 +223,7 @@ Class M_dosen extends CI_Model
     
     public function m_get_transkipnilai($id)
     {
-        $this->db->select("a.id,b.nama,a.nilai, b.sks,b.semester")
+        $this->db->select("a.id_matkul_diambil,b.nama,a.nilai, b.sks,b.semester")
             ->from('transkip_nilai AS a')
             ->join('matakuliah AS b','b.id = a.id_matkul')
             ->where("id_mahasiswa", $id);

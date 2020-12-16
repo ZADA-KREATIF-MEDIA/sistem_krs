@@ -103,7 +103,7 @@
                             foreach($matkul_ambil as $mat):?>
                             <tr>
                                 <td><?php echo $i;?></td>
-                                <td><?php echo $mat['id'];?></td>
+                                <td><?php echo $mat['kode_matkul'];?></td>
                                 <td><?php echo $mat['nama'];?></td>
                                 <td><?php echo $mat['jam_mulai']."-".$mat['jam_selesai'];?></td>
                                 <td><?php echo ucwords($mat['tipe']);?></td>

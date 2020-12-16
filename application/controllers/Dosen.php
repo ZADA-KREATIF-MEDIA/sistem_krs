@@ -61,6 +61,10 @@ class Dosen extends CI_Controller
         $data['dosen']      = $this->mod->m_get_all_dosen();
         $data['matkul_ambil'] = $this->mod->m_get_matkul_diambil($id);
 
+<<<<<<< HEAD
+=======
+       
+>>>>>>> b909528... update 22-09-2020
         if($semester != ""){
             $data['transkip']   = $this->mod->m_get_portofolio($semester,$id);
         }else{
@@ -73,11 +77,20 @@ class Dosen extends CI_Controller
         $this->load->view('dosen/view.php', $data);
         $this->load->view('footer.php');
     }
+<<<<<<< HEAD
 
     public function view_mahasiswa()
     {
         $id = $this->uri->segment(3);
         $data['halaman']    = "View Data Mahasiswa";
+=======
+    public function view_mahasiswa()
+    {
+        $id = $this->uri->segment(3);
+     ;
+        $data['halaman']    = "View Data Mahasiswa";
+     
+>>>>>>> b909528... update 22-09-2020
         $data['matkul_ambil'] = $this->mod->m_get_matkul_diambil_dosen_by($id);
 
         $this->load->view('head.php', $data);
@@ -101,10 +114,17 @@ class Dosen extends CI_Controller
 
     public function status_krs()
     {
+<<<<<<< HEAD
         $tgl_sekarang = date("Y-m-d");
         $post = [
             'id' => $this->input->post('id', TRUE),
             'tgl_perwalian' => $tgl_sekarang,
+=======
+        
+
+        $post = [
+            'id' => $this->input->post('id', TRUE),
+>>>>>>> b909528... update 22-09-2020
             'status' => $this->input->post('status', TRUE),
         ];
         $this->mod->m_update_status($post);
