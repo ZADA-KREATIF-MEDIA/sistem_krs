@@ -55,42 +55,33 @@ class Dosen extends CI_Controller
         $id = $this->uri->segment(3);
         $semester = $this->uri->segment(4);        
         $data['mahasiswa'] = $this->mod->m_get_mahasiswa_by($id);
-        // print('<pre>');print_r($data);exit();
         $data['perwalian']  = $this->mod->m_get_perwalian_by($id);
         $data['halaman']    = "View Data Mahasiswa";
         $data['dosen']      = $this->mod->m_get_all_dosen();
         $data['matkul_ambil'] = $this->mod->m_get_matkul_diambil($id);
+        $data['matkul_krs'] = $this->mod->m_get_matkul_proses_krs($id);
 
-<<<<<<< HEAD
-=======
-       
->>>>>>> b909528... update 22-09-2020
         if($semester != ""){
+            // echo "here";
             $data['transkip']   = $this->mod->m_get_portofolio($semester,$id);
         }else{
+            // echo "here2";
             $data['transkip']   = $this->mod->m_get_transkipnilai($id);
         }
-        // 
+        
+        // print('<pre>');print_r($data['matkul_krs']);exit();
+      
         $this->load->view('head.php', $data);
         $this->load->view('sidebar.php');
         $this->load->view('header.php');
         $this->load->view('dosen/view.php', $data);
         $this->load->view('footer.php');
     }
-<<<<<<< HEAD
 
     public function view_mahasiswa()
     {
         $id = $this->uri->segment(3);
         $data['halaman']    = "View Data Mahasiswa";
-=======
-    public function view_mahasiswa()
-    {
-        $id = $this->uri->segment(3);
-     ;
-        $data['halaman']    = "View Data Mahasiswa";
-     
->>>>>>> b909528... update 22-09-2020
         $data['matkul_ambil'] = $this->mod->m_get_matkul_diambil_dosen_by($id);
 
         $this->load->view('head.php', $data);
@@ -114,17 +105,10 @@ class Dosen extends CI_Controller
 
     public function status_krs()
     {
-<<<<<<< HEAD
         $tgl_sekarang = date("Y-m-d");
         $post = [
             'id' => $this->input->post('id', TRUE),
             'tgl_perwalian' => $tgl_sekarang,
-=======
-        
-
-        $post = [
-            'id' => $this->input->post('id', TRUE),
->>>>>>> b909528... update 22-09-2020
             'status' => $this->input->post('status', TRUE),
         ];
         $this->mod->m_update_status($post);

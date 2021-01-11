@@ -295,4 +295,18 @@ Class M_dosen extends CI_Model
         $this->db->query($query);
         return true;	
     }
+
+    public function m_get_matkul_proses_krs($id)
+    {
+        $this->db->select('c.kode_matkul,c.nama,c.jam_mulai,c.jam_selesai,c.kelas,c.sks,c.tipe,c.semester')
+            ->from('transkip_nilai AS a')
+            ->join('matakuliah_diambil AS b','a.id_matkul_diambil = b.id')
+            ->join('matakuliah AS c','b.id_matakuliah = c.id')
+            ->where('a.id_matkul',0)
+            ->where('a.id_mahasiswa',$id);
+        $query = $this->db->get_compiled_select();
+        // print('<pre>');print_r($query);exit;
+        $data  = $this->db->query($query)->result_array();
+        return $data;
+    }
 }
