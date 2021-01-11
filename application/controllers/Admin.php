@@ -446,26 +446,21 @@ class Admin extends CI_Controller
 
     private function _sendEmail($post)
     {
+        $this->load->library('mailer');
 
-        $config = [
-			'protocol' 	=> 'smtp',
-			'smtp_host' => 'ssl://smtp.googlemail.com',
-			'smtp_user' => 'kprasetya029@gmail.com',
-			'smtp_pass' => 'lionel010',
-			'smtp_port' => 465,
-			'mailtype' 	=> 'html',
-			'charset' 	=> 'utf-8',
-			'newline'	 => "\r\n"
-		];
+		$email_penerima = $post['penerima'];
+		$subjek = 'Informasi KRS';
+		$pesan = $post['isi'];
+		$content = $this->load->view('content', array('pesan'=>$pesan), true); // Ambil isi file content.php dan masukan ke variabel $content
+		$sendmail = array(
+			'email_penerima'=>$email_penerima,
+			'subjek'=>$subjek,
+			'content'=>$content,
+		);
 
-		$this->load->library('email', $config);
-		$this->email->initialize($config);
-
-		$this->email->from('kprasetya029@gmail.com', 'Admin Siakad');
-		$this->email->to($this->input->post('penerima', true));
-        $this->email->subject('Panduan KRS');
-        $this->email->message('test');
-        if($this->email->send()){
+		$send = $this->mailer->send($sendmail); // Panggil fungsi send yang ada di librari Mailer
+        // print('<pre>');print_r($send);exit();
+        if($send['status'] == "Sukses"){
             $this->mod->m_save_send_email($post);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Email Berhasil Terkirim</div>');
             redirect('admin/email');
@@ -473,6 +468,38 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email Gagal Terkirim</div>');
             redirect('admin/email');
         }
+		// echo "<b>".$send['status']."</b><br />";
+		// echo $send['message'];
+		// echo "<br /><a href='".base_url("index.php/email")."'>Kembali ke Form</a>";
+        // $config = [
+		// 	'protocol' 	=> 'smtp',
+		// 	'smtp_host' => 'ssl://smtp.googlemail.com',
+		// 	'smtp_user' => 'kprasetya029@gmail.com',
+		// 	'smtp_pass' => 'wlpwbwytgltrwqmh',
+		// 	// 'smtp_user' => 'tegar.marcelino@gmail.com',
+		// 	// 'smtp_pass' => 'vbvneqlxfnxfgirl',
+        //     'smtp_port' => 465,
+        //     'smtp_crypto' => 'ssl',
+		// 	'mailtype' 	=> 'html',
+		// 	'charset' 	=> 'utf-8',
+		// 	'newline'	 => "\r\n"
+		// ];
+
+		// $this->load->library('email', $config);
+		// $this->email->initialize($config);
+
+		// $this->email->from('kprasetya029@gmail.com', 'Admin Siakad');
+		// $this->email->to($this->input->post('penerima', true));
+        // $this->email->subject('Panduan KRS');
+        // $this->email->message('test');
+        // if($this->email->send()){
+        //     $this->mod->m_save_send_email($post);
+        //     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Email Berhasil Terkirim</div>');
+        //     redirect('admin/email');
+        // } else {
+        //     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email Gagal Terkirim</div>');
+        //     redirect('admin/email');
+        // }
     }
 
 /*---------- Bagian Refrensi Semsester ----------*/
