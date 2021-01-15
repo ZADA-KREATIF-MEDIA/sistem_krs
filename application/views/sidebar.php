@@ -121,11 +121,18 @@
     <?php endif;?>
     <?php if($this->session->userdata('level') == "akademik"):?>
         <hr class="sidebar-divider d-none d-md-block">
+<<<<<<< HEAD
         <li class="nav-item">
+<<<<<<< HEAD
         <a class="nav-link" href="<?php echo base_url('akademik/matakuliah');?>">
                 <i class="fas fa-fw fa-book"></i>
                 <span>Mata Kuliah</span>
             </a>
+=======
+=======
+        <li class="nav-item <?php if($this->uri->segment(2) == "mahasiswa"){echo "active";}?>">
+>>>>>>> 3de846a... update 17-09-2020
+>>>>>>> db57c54... update 20-09-2020
             <a class="nav-link" href="<?php echo base_url('akademik/mahasiswa');?>">
                 <i class="fas fa-fw fa-user-graduate"></i>
                 <span>Mahasiswa</span>
@@ -135,7 +142,11 @@
         <div class="sidebar-heading">
                 Email
             </div>
+<<<<<<< HEAD
             <li class="nav-item">
+=======
+            <li class="nav-item <?php if($this->uri->segment(2) == "email"){echo "active";}?>">
+>>>>>>> 3de846a... update 17-09-2020
                 <a class="nav-link" href="<?php echo base_url('akademik/email');?>">
                     <i class="fas fa-fw fa-envelope"></i>
                     <span>Email</span>
