@@ -201,4 +201,25 @@ Class M_admin extends CI_Model
         return true;
     }
 
+    public function m_get_semester_aktif()
+    {
+        $this->db->select()
+            ->from('refrensi_tahun_ajaran')
+            ->where('id = 1');
+        $query = $this->db->get_compiled_select();
+        $data  = $this->db->query($query)->result_array();
+        return $data;
+    }
+
+    public function m_update_semester($post)
+    {
+        $this->db->select()
+            ->from('refrensi_tahun_ajaran')
+            ->where("id", $post['id']);
+        $query = $this->db->set($post)->get_compiled_update();
+        // print('<pre>');print_r($query);exit();
+        $this->db->query($query);
+        return true;	
+    }
+
 }

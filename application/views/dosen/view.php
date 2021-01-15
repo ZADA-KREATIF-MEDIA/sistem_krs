@@ -80,10 +80,9 @@
     
     <div class="card shadow mb-4">
         <div class="card-header  bg-success py-3">
-            <h6 class="m-0 font-weight-bold text-white">Mata kuliah di ambil Semester ini</h6>
+            <h6 class="m-0 font-weight-bold text-white">Transkip Nilai Matakuliah</h6>
             
         </div>
-        <?= $this->session->flashdata('message'); ?>
         <div class="card-body">
         <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -94,6 +93,7 @@
                             <th>Nama</th>
                             <th>Jam</th>
                             <th>Tipe</th>
+                            <th>Semester</th>
                             <th>Nilai</th>
                         </tr>
                     </thead>
@@ -103,15 +103,16 @@
                             foreach($matkul_ambil as $mat):?>
                             <tr>
                                 <td><?php echo $i;?></td>
-                                <td><?php echo $mat['id'];?></td>
+                                <td><?php echo $mat['kode_matkul'];?></td>
                                 <td><?php echo $mat['nama'];?></td>
                                 <td><?php echo $mat['jam_mulai']."-".$mat['jam_selesai'];?></td>
                                 <td><?php echo ucwords($mat['tipe']);?></td>
+                                <td><?php echo $mat['semester']; ?></td>
                                 <td>
                                 <?php 
                                 if($mat['nilai']!=null)
                                 {
-                                     echo $mat['nilai'];
+                                    echo $mat['nilai'];
                                 }
                                 else
                                 {
@@ -120,6 +121,45 @@
                                 ?>
                                 </td>
                                 
+                            </tr>
+                        <?php
+                            $i++;
+                            endforeach;?>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+    <div class="card shadow mb-4">
+        <div class="card-header  bg-primary py-3">
+            <h6 class="m-0 font-weight-bold text-white">Mata kuliah di ambil</h6>
+            
+        </div>
+        <div class="card-body">
+        <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Kode</th>
+                            <th>Nama</th>
+                            <th>Jam</th>
+                            <th>Tipe</th>
+                            <th>Semester</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            $i = 1;
+                            foreach($matkul_krs as $matkrs):?>
+                            <tr>
+                                <td><?php echo $i;?></td>
+                                <td><?php echo $matkrs['kode_matkul'];?></td>
+                                <td><?php echo $matkrs['nama'];?></td>
+                                <td><?php echo $matkrs['jam_mulai']."-".$matkrs['jam_selesai'];?></td>
+                                <td><?php echo ucwords($matkrs['tipe']);?></td>
+                                <td><?php echo $matkrs['semester']; ?></td>
                             </tr>
                         <?php
                             $i++;

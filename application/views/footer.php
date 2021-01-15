@@ -65,6 +65,11 @@
     <script src="<?php echo base_url('assets/'); ?>vendor/jquery-mask/src/jquery.mask.js"></script>
 
     <script>
+        <?php if($this->uri->segment(1) == "dashboard"):?>
+            function gotoPerwalian(){
+                window.location.href = "<?php echo base_url('mahasiswa/krs'); ?>";
+            }
+        <?php endif;?>
         <?php if(($this->uri->segment(1) == "admin") && ($this->uri->segment(2) == "tambah_dosen")):?>
             $( function() {
                 $( "#tanggal_lahir" ).datepicker({

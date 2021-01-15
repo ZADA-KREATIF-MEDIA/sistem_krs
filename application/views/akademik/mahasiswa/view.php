@@ -7,7 +7,6 @@
             <h6 class="m-0 font-weight-bold text-white">Data Mahasiswa</h6>
         </div>
         <div class="card-body">
-            
             <div class="row">
                 <div class="form-group col-12 col-md-6">
                     <label for="nim">NIM</label>
@@ -69,22 +68,19 @@
             <a href="<?php echo base_url('admin/mahasiswa');?>" class="btn btn-dark text-uppercase">kembali</a>
           -->
         </div>
-
-    
     </div>
 </div>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    
     <div class="card shadow mb-4">
         <div class="card-header  bg-success py-3">
             <h6 class="m-0 font-weight-bold text-white">Mata kuliah di ambil Semester ini</h6>
         </div>
         <?= $this->session->flashdata('message'); ?>
         <div class="card-body">
-        <div class="table-responsive">
+            <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
@@ -103,30 +99,21 @@
                             foreach($matkul_ambil as $mat):?>
                             <tr>
                                 <td><?php echo $i;?></td>
-                                <td><?php echo $mat['id'];?></td>
+                                <td><?php echo $mat['kode_matkul'];?></td>
                                 <td><?php echo $mat['nama'];?></td>
                                 <td><?php echo $mat['jam_mulai']."-".$mat['jam_selesai'];?></td>
                                 <td><?php echo ucwords($mat['tipe']);?></td>
                                 <td>
                                 <?php 
-                                if($mat['nilai']!=null)
-                                {
-                                     echo $mat['nilai'];
+                                    if($mat['nilai']!=null){
+                                        echo $mat['nilai'];
+                                    }else{
                                 ?>
-                                   
-                                <?php
-                                }
-                                else
-                                {
-                                ?>
-                                     <div class="form-group">
-   <a data-toggle="modal" data-target="#tambah-data" class="btn btn-primary text-white">Tambah</a>
-  
-  </div>
-                                     
+                                <div class="form-group">
+                                    <a data-toggle="modal" data-target="#tambah-data<?php echo $mat['id_matkul_diambil']?>" class="btn btn-primary text-white">Tambah</a>
+                                </div>
                                 <?php   
-                                }
-                                
+                                    }
                                 ?>
                                 </td>
                             </tr>
@@ -135,7 +122,6 @@
                             endforeach;?>
                     </tbody>
                 </table>
-                
             </div>
         </div>
     </div>
@@ -144,80 +130,81 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    
-    
-        <div class="card bg-blue shadow mb-4">
-            <div class="card-header bg-primary py-3">
+    <div class="card bg-blue shadow mb-4">
+        <div class="card-header bg-primary py-3">
             <h6 class="m-0 font-weight-bold text-white">Portofolio Akademik</h6>
-             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered"  width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Matakuliah</th>
-                                <th>SKS</th>
-                                <th>Nilai</th>
-                                <th>Semester</th>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered"  width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Matakuliah</th>
+                            <th>SKS</th>
+                            <th>Nilai</th>
+                            <th>Semester</th>
 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                            $i = 1;
+                            $total_sks=0;
+                        foreach($transkip as $tr):?>
+                            <tr>
+                                <td><?php echo $i;?></td>
+                                <td><?php echo $tr['nama'];?></td>
+                                <td><?php echo $tr['sks'];?></td>
+                                <td><?php echo $tr['nilai'];?></td>
+                                <td><?php echo ucwords($tr['semester']);?></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                                $i = 1;
-                                $total_sks=0;
-                            foreach($transkip as $tr):?>
-                                <tr>
-                                    <td><?php echo $i;?></td>
-                                    <td><?php echo $tr['nama'];?></td>
-                                    <td><?php echo $tr['sks'];?></td>
-                                    <td><?php echo $tr['nilai'];?></td>
-                                    <td><?php echo ucwords($tr['semester']);?></td>
-                                </tr>
-                            <?php
-                                 $total_sks +=$tr['sks'];
-                                $i++;
-                            endforeach;?>
-                                <tr>
-                                <td colspan="2"><strong>TOTAL SKS</strong></td><td colspan="3"><strong><?= $total_sks ?></strong></td>
-                                </tr>
-                        </tbody>
-                    </table>
-                </div>
+                        <?php
+                            $total_sks +=$tr['sks'];
+                            $i++;
+                        endforeach;?>
+                            <tr>
+                            <td colspan="2"><strong>TOTAL SKS</strong></td><td colspan="3"><strong><?= $total_sks ?></strong></td>
+                            </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-   
+    </div>
 </div>
-<!-- /.container-fluid -->
-<!-- /.container-fluid -->
-<!-- /.container-fluid -->
 
- <!-- Modal Tambah -->
- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="tambah-data" class="modal fade">
-     <div class="modal-dialog">
-         <div class="modal-content">
-             <div class="modal-header">
-                 <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
-                 <h4 class="modal-title">Tambah Data</h4>
-             </div>
-             <form class="form-horizontal" action="<?php echo base_url('akademik/input_nilai')?>" method="post" role="form">
-              <div class="modal-body">
-                      <div class="form-group">
-                      <input type="hidden" name="id_mahasiswa" value="<?php echo $mat['id_mahasiswa'];?>">
-                      
-                                    <input type="hidden" name="id_matkul" value="<?php echo $mat['id_matkul'];?>">
-                                    <input class="form-control" type="text" name="nilai" placeholder="Input nilai mahasiswa" style="text-transform:uppercase" pattern="[A-E]" required>
-                      </div>
-                   
-                  </div>
-                  <div class="modal-footer">
-                      <button class="btn btn-info" type="submit"> Simpan&nbsp;</button>
-                      <button type="button" class="btn btn-warning" data-dismiss="modal"> Batal</button>
-                  </div>
-                 </form>
-             </div>
-         </div>
-     </div>
- 
- 
+<?php foreach($matkul_ambil as $mat):?>
+    <!-- Modal Tambah -->
+    <div aria-hidden="true" role="dialog" tabindex="-1" id="tambah-data<?php echo $mat['id_matkul_diambil'];?>" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Input Nilai Mahasiswa</h4>
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                </div>
+                <form class="form-horizontal" action="<?php echo base_url('akademik/input_nilai')?>" method="post" role="form">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" name="id_mahasiswa" value="<?php echo $mat['id_mahasiswa'];?>">
+                            <input type="hidden" name="id_matkul_diambil" value="<?php echo $mat['id_matkul_diambil'];?>">
+                            <input type="hidden" name="id_matkul" value="<?php echo $mat['id_matakuliah'];?>">
+                            <label for="nilai">Nilai Mahasiswa</label>
+                            <select name="nilai" id="nilai" class="form-control">
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                            </select>
+                            <!-- <input class="form-control" type="text" name="nilai" placeholder="Input nilai mahasiswa" style="text-transform:uppercase" pattern="[A-E]" required> -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" type="submit"> Simpan&nbsp;</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal"> Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach;?>

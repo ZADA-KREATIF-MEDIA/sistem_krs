@@ -5,6 +5,7 @@
     <?php echo form_open('mahasiswa/ambil_matkul');?>
         <div class="card shadow mb-4">
             <div class="card-header py-3">
+            <a href="https://wa.me/<?= $wa_dosen ?>" target="_blank" class="btn btn-success float-right"><i class="fab fa-whatsapp mr-1"></i>Whatsapp Dosen</a>.
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -25,7 +26,11 @@
                             foreach($perwalian as $per):?>
                                 <tr>
                                     <td><?php echo $i;?></td>
-                                    <td><?php echo date("Y-m-d", strtotime($per['tgl_perwalian']));?></td>
+                                    <?php if($per['tgl_perwalian'] == "0000-00-00"):?>
+                                        <td>-</td>
+                                    <?php else:?>
+                                        <td><?php echo date("Y-m-d", strtotime($per['tgl_perwalian']));?></td>
+                                    <?php endif;?>
                                     <td><?php echo $per['tahun_ajaran'];?></td>
                                     <td><?php echo $per['semester'];?></td>
                                     <td>

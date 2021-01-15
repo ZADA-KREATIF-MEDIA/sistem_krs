@@ -12,6 +12,14 @@ class Login extends CI_Controller
     {
         $data['judul'] = "Halaman Login";
         $this->load->view('login/header.php', $data);
+        $this->load->view('login/login');
+        $this->load->view('login/footer.php');
+    }
+
+    public function mahasiswa()
+    {
+        $data['judul'] = "Halaman Login Mahasiswa";
+        $this->load->view('login/header.php', $data);
         $this->load->view('login/login_mahasiswa.php');
         $this->load->view('login/footer.php');
     }
@@ -69,21 +77,21 @@ class Login extends CI_Controller
                 if(password_verify($password, $mahasiswa['password'])) {
                     //echo "sini";
                     $data = [
-                        'mhs_id'    => $mahasiswa['id'],
-                        'mhs_id_dosen' => $mahasiswa['id_dosen'],
-                        'mhs_nim'   => $mahasiswa['nim'],
-                        'nama'      => $mahasiswa['nama'],
-                        'level'     => 'mahasiswa'
+                        'mhs_id'        => $mahasiswa['id'],
+                        'mhs_id_dosen'  => $mahasiswa['id_dosen'],
+                        'mhs_nim'       => $mahasiswa['nim'],
+                        'nama'          => $mahasiswa['nama'],
+                        'level'         => 'mahasiswa'
                     ];
                     $this->session->set_userdata($data);
                     redirect('/dashboard');
                 } else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">NIM atau Password Salah</div>');
-                    redirect('login');
+                    redirect('login/mahasiswa');
                 }
             }else{
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">NIM tidak ditemukan</div>');
-                redirect('login');
+                redirect('login/mahasiswa');
             } 
         }
         
@@ -211,7 +219,7 @@ class Login extends CI_Controller
         $level = $this->session->userdata('level');
         if($level == "mahasiswa"){
             session_destroy();
-            redirect('/');
+            redirect('login/mahasiswa');
         }else if($level == "akademik"){
             session_destroy();
             redirect('login/akademik');

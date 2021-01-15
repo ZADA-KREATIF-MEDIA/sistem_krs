@@ -170,26 +170,33 @@ Class M_akademik extends CI_Model{
 
     public function m_get_matkul_diambil($id)
     {
-        $this->db->select("a.id, a.id_mahasiswa, tn.nilai, b.id AS id_matkul, b.kode_matkul, b.nama, b.jam_mulai, b.jam_selesai, b.kelas, b.sks, b.tipe, b.semester")
-            ->from('matakuliah_diambil AS a')
-            ->join('matakuliah AS b', 'b.id = a.id_matakuliah', 'left')
-            ->join('transkip_nilai AS tn', 'tn.id_matkul = a.id_matakuliah', 'left')
-            ->where("a.id_mahasiswa", $id);
+        $this->db->select("a.id_matkul_diambil ,a.nilai, a.id_mahasiswa, b.id_matakuliah, c.kode_matkul, c.nama, c.jam_mulai, c.jam_selesai, c.kelas, c.sks, c.tipe, c.semester")
+            ->from('transkip_nilai AS a')
+            ->join('matakuliah_diambil AS b', 'b.id = a.id_matkul_diambil', 'left')
+            ->join('matakuliah AS c','c.id = b.id_matakuliah', 'left')
+            ->where('a.id_mahasiswa',$id);
         $query = $this->db->get_compiled_select();
         // print('<pre>');print_r($query);exit;
         $data  = $this->db->query($query)->result_array();
         return $data;
     }
 
-    public function m_simpan_nilai($post)
+    public function m_update_nilai($post)
     {
-        $this->db->insert('transkip_nilai', $post);
-        return true;
+        // $this->db->insert('transkip_nilai', $post);
+        // return true;
+        $this->db->select()
+            ->from('transkip_nilai')
+            ->where("id_matkul_diambil", $post['id_matkul_diambil']);
+        $query = $this->db->set($post)->get_compiled_update();
+        // print('<pre>');print_r($query);exit();
+        $this->db->query($query);
+        return true;	
     }
 
     public function m_get_portofolio($semester,$id)
     {
-        $this->db->select("a.id,b.nama,a.nilai b.semester")
+        $this->db->select("a.id_matkul_diambil,b.nama,a.nilai b.semester")
             ->from('transkip_nilai AS a')
             ->join('matakuliah AS b','b.id = a.id_matkul')
             ->where("id_mahasiswa", $id)
@@ -203,7 +210,7 @@ Class M_akademik extends CI_Model{
     
     public function m_get_transkipnilai($id)
     {
-        $this->db->select("a.id,b.nama,a.nilai, b.sks,b.semester")
+        $this->db->select("a.id_matkul_diambil,b.nama,a.nilai, b.sks,b.semester")
             ->from('transkip_nilai AS a')
             ->join('matakuliah AS b','b.id = a.id_matkul')
             ->where("id_mahasiswa", $id);
@@ -212,4 +219,26 @@ Class M_akademik extends CI_Model{
         $data  = $this->db->query($query)->result_array();
         return $data;
     }
+
+    public function m_get_semester_aktif()
+    {
+        $this->db->select()
+            ->from('refrensi_tahun_ajaran')
+            ->where('id = 1');
+        $query = $this->db->get_compiled_select();
+        $data  = $this->db->query($query)->result_array();
+        return $data;
+    }
+
+    public function m_update_semester($post)
+    {
+        $this->db->select()
+            ->from('refrensi_tahun_ajaran')
+            ->where("id", $post['id']);
+        $query = $this->db->set($post)->get_compiled_update();
+        // print('<pre>');print_r($query);exit();
+        $this->db->query($query);
+        return true;	
+    }
+
 }

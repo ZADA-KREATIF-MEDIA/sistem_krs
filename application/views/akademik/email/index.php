@@ -1,7 +1,9 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Data Akademik</h1>
+
+    <h1 class="h3 mb-4 text-gray-800">Data Email</h1>
+
     <?= $this->session->flashdata('message'); ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
