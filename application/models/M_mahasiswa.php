@@ -111,7 +111,7 @@ Class M_mahasiswa extends CI_Model
 
     public function m_get_transkipnilai()
     {
-        $this->db->select("a.id_matkul_diambil,b.nama,a.nilai, b.semester")
+        $this->db->select("a.id_matkul_diambil,b.nama,a.nilai, b.sks, b.semester")
             ->from('transkip_nilai AS a')
             ->join('matakuliah AS b','b.id = a.id_matkul')
             ->where("id_mahasiswa", $this->session->userdata('mhs_id'));
