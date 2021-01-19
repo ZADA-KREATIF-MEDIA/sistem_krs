@@ -446,26 +446,21 @@ class Admin extends CI_Controller
 
     private function _sendEmail($post)
     {
+        $this->load->library('mailer');
 
-        $config = [
-			'protocol' 	=> 'smtp',
-			'smtp_host' => 'ssl://smtp.googlemail.com',
-			'smtp_user' => 'dicaribapak11@gmail.com',
-			'smtp_pass' => 'akuaku123',
-			'smtp_port' => 465,
-			'mailtype' 	=> 'html',
-			'charset' 	=> 'utf-8',
-			'newline'	 => "\r\n"
-		];
+		$email_penerima = $post['penerima'];
+		$subjek = 'Informasi KRS';
+		$pesan = $post['isi'];
+		$content = $this->load->view('content', array('pesan'=>$pesan), true); // Ambil isi file content.php dan masukan ke variabel $content
+		$sendmail = array(
+			'email_penerima'=>$email_penerima,
+			'subjek'=>$subjek,
+			'content'=>$content,
+		);
 
-		$this->load->library('email', $config);
-		$this->email->initialize($config);
-
-		$this->email->from('dicaribapak11@gmail.com', 'Admin Siakad');
-		$this->email->to($this->input->post('penerima', true));
-        $this->email->subject('Panduan KRS');
-        $this->email->message('test');
-        if($this->email->send()){
+		$send = $this->mailer->send($sendmail); // Panggil fungsi send yang ada di librari Mailer
+        // print('<pre>');print_r($send);exit();
+        if($send['status'] == "Sukses"){
             $this->mod->m_save_send_email($post);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Email Berhasil Terkirim</div>');
             redirect('admin/email');
@@ -473,7 +468,63 @@ class Admin extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email Gagal Terkirim</div>');
             redirect('admin/email');
         }
+		// echo "<b>".$send['status']."</b><br />";
+		// echo $send['message'];
+		// echo "<br /><a href='".base_url("index.php/email")."'>Kembali ke Form</a>";
+        // $config = [
+		// 	'protocol' 	=> 'smtp',
+		// 	'smtp_host' => 'ssl://smtp.googlemail.com',
+		// 	'smtp_user' => 'kprasetya029@gmail.com',
+		// 	'smtp_pass' => 'wlpwbwytgltrwqmh',
+		// 	// 'smtp_user' => 'tegar.marcelino@gmail.com',
+		// 	// 'smtp_pass' => 'vbvneqlxfnxfgirl',
+        //     'smtp_port' => 465,
+        //     'smtp_crypto' => 'ssl',
+		// 	'mailtype' 	=> 'html',
+		// 	'charset' 	=> 'utf-8',
+		// 	'newline'	 => "\r\n"
+		// ];
+
+		// $this->load->library('email', $config);
+		// $this->email->initialize($config);
+
+		// $this->email->from('kprasetya029@gmail.com', 'Admin Siakad');
+		// $this->email->to($this->input->post('penerima', true));
+        // $this->email->subject('Panduan KRS');
+        // $this->email->message('test');
+        // if($this->email->send()){
+        //     $this->mod->m_save_send_email($post);
+        //     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Email Berhasil Terkirim</div>');
+        //     redirect('admin/email');
+        // } else {
+        //     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email Gagal Terkirim</div>');
+        //     redirect('admin/email');
+        // }
     }
 
+/*---------- Bagian Refrensi Semsester ----------*/
+    public function semester_aktif()
+    {
+        $data['halaman']    = "Semester Aktif";
+        $data['semester']   = $this->mod->m_get_semester_aktif();
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('admin/semester/index', $data);
+        $this->load->view('footer.php');
+    }
+
+    public function update_semester()
+    {
+        $post = [
+            'id'            => $this->input->post('id', true),
+            'semester'      => $this->input->post('semester', true),
+            'tahun_ajaran'  => $this->input->post('tahun_ajaran', true)
+        ];
+        // print('<pre>');print_r($post);exit();
+        $this->mod->m_update_semester($post);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Update Semester Berhasil</div>');
+        redirect('admin/semester_aktif');
+    }
 
 }

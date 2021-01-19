@@ -91,11 +91,12 @@ class Akademik extends CI_Controller
         $data['halaman']    = "View Data Mahasiswa";
         $data['dosen']      = $this->mod->m_get_all_dosen();
         $data['matkul_ambil'] = $this->mod->m_get_matkul_diambil($id);
-
-       
+        
         if($semester != ""){
+            // echo "here";
             $data['transkip']   = $this->mod->m_get_portofolio($semester,$id);
         }else{
+            // echo "here2";
             $data['transkip']   = $this->mod->m_get_transkipnilai($id);
         }
         // 
@@ -111,18 +112,17 @@ class Akademik extends CI_Controller
             $id_mahasiswa=$this->input->post('id_mahasiswa', TRUE);
 
             $post = [
-                'id_mahasiswa' => $this->input->post('id_mahasiswa', TRUE),
+                'id_matkul_diambil' => $this->input->post('id_matkul_diambil', TRUE),
                 'nilai' => $this->input->post('nilai', TRUE),
                 'id_matkul' => $this->input->post('id_matkul', TRUE),
-                
             ];
-            $this->mod->m_simpan_nilai($post);
+            // print('<pre>');print_r($post);exit();
+            $this->mod->m_update_nilai($post);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Nilai berhasil di input</div>');
             redirect("akademik/view_mahasiswa/"."$id_mahasiswa");
         
     }
 
-  
 
     public function update_mahasiswa()
     {
@@ -197,8 +197,8 @@ class Akademik extends CI_Controller
         $config = [
 			'protocol' 	=> 'smtp',
 			'smtp_host' => 'ssl://smtp.googlemail.com',
-			'smtp_user' => 'dicaribapak11@gmail.com',
-			'smtp_pass' => 'akuaku123',
+			'smtp_user' => 'kprasetya029@gmail.com',
+			'smtp_pass' => 'lionel010',
 			'smtp_port' => 465,
 			'mailtype' 	=> 'html',
 			'charset' 	=> 'utf-8',
@@ -208,7 +208,7 @@ class Akademik extends CI_Controller
 		$this->load->library('email', $config);
 		$this->email->initialize($config);
 
-		$this->email->from('dicaribapak11@gmail.com', 'Admin Siakad');
+		$this->email->from('kprasetya029@gmail.com', 'Admin Siakad');
 		$this->email->to($this->input->post('penerima', true));
         $this->email->subject('Panduan KRS');
         $this->email->message('test');
@@ -336,6 +336,31 @@ class Akademik extends CI_Controller
         $this->mod->m_hapus_matakuliah($id);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Matakuliah Berhasil Dihapus</div>');
         redirect('admin/matakuliah');
+    }
+
+    /*---------- Bagian Refrensi Semsester ----------*/
+    public function semester_aktif()
+    {
+        $data['halaman']    = "Semester Aktif";
+        $data['semester']   = $this->mod->m_get_semester_aktif();
+        $this->load->view('head.php', $data);
+        $this->load->view('sidebar.php');
+        $this->load->view('header.php');
+        $this->load->view('admin/semester/index', $data);
+        $this->load->view('footer.php');
+    }
+
+    public function update_semester()
+    {
+        $post = [
+            'id'            => $this->input->post('id', true),
+            'semester'      => $this->input->post('semester', true),
+            'tahun_ajaran'  => $this->input->post('tahun_ajaran', true)
+        ];
+        // print('<pre>');print_r($post);exit();
+        $this->mod->m_update_semester($post);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Update Semester Berhasil</div>');
+        redirect('admin/semester_aktif');
     }
 
 }

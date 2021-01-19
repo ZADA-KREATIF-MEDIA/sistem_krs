@@ -27,9 +27,6 @@
                                 <?php echo form_close();?>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                </div>
-                                <div class="text-center">
                                     <a class="small" href="<?php echo base_url('login/register')?>">Daftar Sebagai Mahasiswa</a>
                                 </div>
                             </div>
