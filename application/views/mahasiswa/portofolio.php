@@ -7,8 +7,8 @@
             <div class="card-header py-3">
                 <select name="semester" id="semester">
                     <option>--- Pilih Semester ---</option>
-                    <option value="ganjil" <?php if($this->uri->segment(3) == "ganjil"){ echo "selected";}?>>Ganjil</option>
-                    <option value="genap" <?php if($this->uri->segment(3) == "genap"){ echo "selected";}?>>Genap</option>
+                    <option value="ganjil" <?php if($this->uri->segment(3) == "ganjil"){ echo "selected";}?>>Ganjil 2019/2020</option>
+                    <option value="genap" <?php if($this->uri->segment(3) == "genap"){ echo "selected";}?>>Genap 2020/2021</option>
                 </select>
             </div>
             <div class="card-body">

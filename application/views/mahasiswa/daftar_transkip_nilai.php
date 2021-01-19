@@ -14,23 +14,31 @@
                                 <th>No</th>
                                 <th>Matakuliah</th>
                                 <th>Nilai</th>
-                                <th>Semester</th>
+                                <th>SKS</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
                                 $i = 1;
+                                $total_sks = 0;
                             foreach($transkip as $tr):?>
                                 <tr>
                                     <td><?php echo $i;?></td>
                                     <td><?php echo $tr['nama'];?></td>
                                     <td><?php echo $tr['nilai'];?></td>
-                                    <td><?php echo ucwords($tr['semester']);?></td>
+                                    <td><?php echo ucwords($tr['sks']);?></td>
                                 </tr>
                             <?php
+                                $total_sks += $tr['sks'];
                                 $i++;
                             endforeach;?>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-right">Jumlah SKS Diambil</td>
+                                <td><?php echo $total_sks; ?></td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
